@@ -153,15 +153,15 @@
                     <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                     <can_be_empty>1</can_be_empty>
                 </field>
-                <field id="defaultstore" translate="label" type="select" sortOrder="92" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="default_store" translate="label" type="select" sortOrder="92" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Default Store </label>
                     <source_model>Magestore\Storepickup\Model\Config\Source\DefaultStore</source_model>
                 </field>
-                <field id="displaypickuptime" translate="label" type="select" sortOrder="93" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="display_pickuptime" translate="label" type="select" sortOrder="93" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Display Pickup Time</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="formattime" translate="label" type="select" sortOrder="94" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="format_time" translate="label" type="select" sortOrder="94" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Time Format</label>
                     <source_model>Magestore\Storepickup\Model\Config\Source\FormatTime</source_model>
                 </field>
