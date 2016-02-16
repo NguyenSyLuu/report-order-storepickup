@@ -43,5 +43,18 @@
                 <distance_unit>1</distance_unit>
             </searching>
         </storepickup>
+        <carriers>
+            <storepickup>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Magestore\Storepickup\Model\Carrier\Method</model>
+                <name>Store Pickup</name>
+                <price>0.00</price>
+                <title>Store Pickup</title>
+                <type>I</type>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <handling_type>F</handling_type>
+            </storepickup>
+        </carriers>
     </default>
 </config>
