@@ -37,7 +37,7 @@ class Store extends \Magestore\Storepickup\Block\AbstractBlock
      * @param array                                            $data
      */
     public function __construct(
-        \Magestore\Storepickup\Block\Context $context,
+        \Magento\Framework\View\Element\Template\Context $context,
         array $data = []
     ) {
         parent::__construct($context, $data);

@@ -37,11 +37,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_converter;
 
     /**
-     * @var \Magento\Framework\Stdlib\DateTime\TimezoneInterface
-     */
-    protected $_localeDate;
-
-    /**
      * @var \Magestore\Storepickup\Model\Factory
      */
     protected $_factory;
@@ -65,7 +60,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Backend\Helper\Js
      */
     protected $_backendHelperJs;
-    protected $_getHtml;
+
     /**
      * Block constructor.
      *
@@ -77,8 +72,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Backend\Block\Widget\Grid\Column\Renderer\Options\Converter $converter,
         \Magento\Backend\Helper\Js $backendHelperJs,
         \Magento\Backend\Model\Session $backendSession,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $localeDate,
-        Magento\Framework\Data\Form\Element\Date $Html,
         \Magestore\Storepickup\Model\StoreFactory $storeFactory
     ) {
         parent::__construct($context);
@@ -87,8 +80,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->_storeFactory = $storeFactory;
         $this->_backendHelperJs = $backendHelperJs;
         $this->_backendSession = $backendSession;
-        $this->_getHtml= $Html;
-        $this->_localeDate = $localeDate;
     }
 
     /**
@@ -154,49 +145,4 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $this->_sessionData;
     }
-    public function getDateFormat()
-    {
-        $date_format = $this->_localeDate->getDateFormat(\IntlDateFormatter::SHORT);
-        $date_format=str_replace('/','-',$$date_format);
-        // return $date_format;
-        //Edit by Tien
-        // Fix for most languages
-        switch ($date_format) {
-            case 'd-M-yyyy':
-            case 'dd-MM-yy':
-            case 'd.M.yyyy':
-            case 'dd.MM.yyyy':
-            case 'dd-MM-yyyy':
-            case 'dd.M.yyyy':
-            case 'd.M.yyyy.':
-            case 'd. MM. yyyy':
-                return '%d-%m-%Y';
-                break;
-            case 'yyyy-MM-dd':
-            case 'yyyy.MM.dd.':
-            case 'yyyy. M. d.':
-            case 'yyyy-M-d':
-                return '%Y-%m-%d';
-                break;
-            case 'M-d-yy':
-            case 'M.d.yy':
-            case 'M-dd-yyyy':
-            case 'M.dd.yyyy':
-            case 'MM-dd-yyyy':
-            case 'MM.dd.yyyy':
-                return '%m-%d-%Y';
-                break;
-
-        }
-    }
-    public function getTimeFormat()
-    {
-        return $this->_localeDate->getTimeFormat(\IntlDateFormatter::SHORT);
-    }
-
-    public function getElementHtml23()
-    {
-        return $this->_getHtml->getElementHtml();
-    }
-
 }

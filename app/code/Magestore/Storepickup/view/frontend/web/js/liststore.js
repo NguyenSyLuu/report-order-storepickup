@@ -81,11 +81,7 @@ define([
                 }
                 $(self.element).trigger('clickStore', {index: $(this).data('store-index')});
             });
-            $(self.element).find('.btn-link.apply').click(function () {
-                alert('asd');
 
-
-            });
             $(self.element).find('.btn-link.direction').click(function () {
                 var $store = $(this).parents('.store-item');
                 self.$directionBox.direction('setAddress', $store.data('address'));
@@ -106,7 +102,6 @@ define([
                 var $store = $(this).parents('.store-item');
                 $(self.element).trigger('streetview', {index: $store.data('store-index')});
             });
-
         },
 
         addEventDirectionBox: function (storeItem) {
@@ -126,13 +121,7 @@ define([
                     self.$directionBox.show();
                 }
             });
-            storeItem.find('.btn-link.apply').click(function () {
-                var $store = $(this).parents('.store-item');
-                //alert($store.data('store-id'));
-                $('#popup-mpdal').modal('closeModal');
-                $('.list-store-container').val($store.data('store-id'));
 
-            });
             storeItem.find('.btn-link.street-view').click(function () {
                 var $store = $(this).parents('.store-item');
                 $(self.element).trigger('streetview', {index: $store.data('store-index')});

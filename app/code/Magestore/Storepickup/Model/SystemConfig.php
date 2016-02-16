@@ -115,56 +115,7 @@ class SystemConfig
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get title of Storepikcup Shipping Method
      */
-    const XML_PATH_CARRIERS_TITLE = 'carriers/storepickup/title';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get title of Storepikcup Shipping Method
-     */
-    const XML_PATH_CARRIERS_NAME = 'carriers/storepickup/name';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get name of Storepikcup Shipping Method
-     */
-    const XML_PATH_CARRIERS_PRICE = 'carriers/storepickup/price';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get default store to pickup
-     */
-    const XML_PATH_CARRIERS_DEFAULT_STORE = 'carriers/storepickup/default_store';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to enable pickup date/time
-     */
-    const XML_PATH_CARRIERS_DISPLAY_PICKUPTIME = 'carriers/storepickup/display_pickuptime';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get format time
-     */
-    const XML_PATH_CARRIERS_DISPLAY_FORMAT_TIME = 'carriers/storepickup/format_time';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get specificerr message
-     */
-    const XML_PATH_CARRIERS_SPECIFICERMSG = 'carriers/storepickup/specificerrmsg';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get format time
-     */
-    const XML_PATH_CARRIERS_SORT_ORDER = 'carriers/storepickup/sort_order';
-
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-
     protected $_scopeConfig;
 
     /**
@@ -455,68 +406,5 @@ class SystemConfig
         );
 
         return isset($this->_distanceUnitMap[$unitCode]) ? $this->_distanceUnitMap[$unitCode] : 'Km';
-    }
-    /**
-     * Get Title of Store Pikcup method.
-     *
-     * @param \Magento\Store\Model\Store|string|int|null $store
-     *
-     * @return mixed
-     */
-    public function getShippingTitle($store = null)
-    {
-        return $this->_scopeConfig->getValue(
-            self::XML_PATH_CARRIERS_TITLE,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-    public function getShippingName($store = null)
-    {
-        return $this->_scopeConfig->getValue(
-            self::XML_PATH_CARRIERS_NAME,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-    public function getPrice($store = null)
-    {
-        return $this->_scopeConfig->getValue(
-            self::XML_PATH_CARRIERS_PRICE,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-    public function getDefaultStore($store = null)
-    {
-        return $this->_scopeConfig->getValue(
-            self::XML_PATH_CARRIERS_DEFAULT_STORE,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-    public function isDisplayPickuptime($store = null)
-    {
-        return $this->_scopeConfig->getValue(
-            self::XML_PATH_CARRIERS_DISPLAY_PICKUPTIME,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-    public function getErrorMessage($store = null)
-    {
-        return $this->_scopeConfig->getValue(
-            self::XML_PATH_CARRIERS_SPECIFICERMSG,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-    public function getSortOrder($store = null)
-    {
-        return $this->_scopeConfig->getValue(
-            self::XML_PATH_CARRIERS_SORT_ORDER,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
     }
 }
