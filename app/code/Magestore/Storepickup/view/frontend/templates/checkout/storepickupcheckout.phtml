@@ -1,0 +1,50 @@
+<?php
+/** @var \Magestore\Storepickup\Block\Wrapper $block */
+?>
+<script type="text/javascript">
+
+    var select_store_by_map ='<div id="select_store_by_map" ><?php echo __("Select store by map") ?></div>';
+    var shipping_date_div = '<div id="shipping_date_div" class="storepickup-box ">'
+        + '<label class="required" for="shipping_date">Shipping Date </label>'
+        + '<input name="shipping_date" type="text" id="shipping_date" value="" class="input-text required-entry form-control" readonly>'
+        + '</div>' +'<br />';
+    var time_box = '<div id="time-box" class="storepickup-box" style="display:none;">'
+        + '<label class="required" for="shipping_time">Shipping Time </label>'
+        + '<select id="shipping_time" name="shipping_time" class="validate-select form-control"></select>'
+        + '</div>';
+    var defaultStore= <?php echo $block->getSystemConfig()->getDefaultStore() ?>;
+    var isDisplayPickuptime= <?php echo $block->getSystemConfig()->isDisplayPickuptime() ?>;
+    var calendar_pickup = <?php echo $this->getDataMageIniDate() ?>;
+    //var storepicup_checkoutpage = shipping_date_div +time_box + calendar_pickup;
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Choose store by map',
+                buttons: [{
+                    text: $.mage.__(''),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-mpdal'));
+        }
+    );
+    window.liststoreJson = <?php echo $block->getListStore() ?>;
+</script>
+
+<div id="popup-mpdal" class="storepickup-wrapper col-full" style="display: none;">
+    <?php echo $block->getChildHtml('storepickupCheckout.gmapstore') ?>;
+</div>
