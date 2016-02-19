@@ -20,20 +20,14 @@
 var config = {
     map: {
         '*': {
-            'magestore/googlemap' : 'Magestore_Storepickup/js/googlemap',
-            'magestore/pagination' : 'Magestore_Storepickup/js/pagination',
-            'magestore/tag' : 'Magestore_Storepickup/js/tag',
-            'magestore/liststore' : 'Magestore_Storepickup/js/liststore',
-            'magestore/direction' : 'Magestore_Storepickup/js/direction',
-            'magestore/searchbox' : 'Magestore_Storepickup/js/searchbox',
-            'magestore/viewpage/map' : 'Magestore_Storepickup/js/viewpage/map',
-            'magestore/checkout/googlemapcheckout' : 'Magestore_Storepickup/js/checkout/googlemapcheckout',
-            'magestore/checkout/paginationcheckout' : 'Magestore_Storepickup/js/checkout/paginationcheckout',
-            'magestore/checkout/liststorecheckout' : 'Magestore_Storepickup/js/checkout/liststorecheckout',
-            'magestore/checkout/directioncheckout' : 'Magestore_Storepickup/js/checkout/directioncheckout',
-            'magestore/checkout/searchboxcheckout' : 'Magestore_Storepickup/js/checkout/searchboxcheckout'
+            'magestore/googlemap': 'Magestore_Storepickup/js/googlemap',
+            'magestore/pagination': 'Magestore_Storepickup/js/pagination',
+            'magestore/tag': 'Magestore_Storepickup/js/tag',
+            'magestore/liststore': 'Magestore_Storepickup/js/liststore',
+            'magestore/direction': 'Magestore_Storepickup/js/direction',
+            'magestore/searchbox': 'Magestore_Storepickup/js/searchbox',
+            'magestore/viewpage/map': 'Magestore_Storepickup/js/viewpage/map'
         }
     },
-    paths: {
-    }
+    paths: {}
 };

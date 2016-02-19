@@ -22,12 +22,13 @@
 
 /** @var \Magestore\Storepickup\Block\ListStore\ListStoreBox $block */
 ?>
-<div data-mage-init='{"magestore/direction": {}}' class="option-direction custom-popup col-xs-12"style="display: none;padding: 0;">
+<div data-mage-init='{"magestore/direction": {}}' class="option-direction custom-popup col-xs-12"
+     style="display: none;padding: 0;">
     <ul class="vertical text-center">
         <li class="travel car active" data-traveling="DRIVING"><span>A</span></li>
-        <li class="travel bus"  data-traveling="TRANSIT"><span>A</span></li>
-        <li class="travel walk"  data-traveling="WALKING"><span>A</span></li>
-        <li class="travel bicycle"  data-traveling="BICYCLING"><span>A</span></li>
+        <li class="travel bus" data-traveling="TRANSIT"><span>A</span></li>
+        <li class="travel walk" data-traveling="WALKING"><span>A</span></li>
+        <li class="travel bicycle" data-traveling="BICYCLING"><span>A</span></li>
     </ul>
     <div id="directions-tool" class="col-xs-12 directions-tool">
         <div class="widget-directions-searchbox-handle">
@@ -36,11 +37,14 @@
             <div class="widget-directions-icon waypoint-bullet"><label for="origin">B</label></div>
         </div>
         <div class="form-inputs">
-            <input class="form-control origin originA start" type="text" name="originA" isStart="true" autocomplete="off">
-            <input class="form-control origin originB end" readonly="true" type="text" name="originB" autocomplete="off" value="">
+            <input class="form-control origin originA start" type="text" name="originA" isStart="true"
+                   autocomplete="off">
+            <input class="form-control origin originB end" readonly="true" type="text" name="originB" autocomplete="off"
+                   value="">
         </div>
         <div class="widget-directions-right-overlay">
-            <button type="button" onclick="" class="swap-locations" title="<?php echo __('Swap locations A-B') ?>"><?php echo __('Swap locations A-B') ?></button>
+            <button type="button" onclick="" class="swap-locations"
+                    title="<?php echo __('Swap locations A-B') ?>"><?php echo __('Swap locations A-B') ?></button>
         </div>
         <div class="directions-panel"></div>
     </div>
@@ -54,13 +58,15 @@
 </div>
 <div class="list-store-box col-sm-4 col-xs-12 pull-left">
     <div class="page-title">
-        <h2 class="title"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span><span><?php echo  __('Store list') ?></span><span class="number-store pull-right"></span></h2>
+        <h2 class="title"><span class="glyphicon glyphicon-align-justify"
+                                aria-hidden="true"></span><span><?php echo __('Store list') ?></span><span
+                class="number-store pull-right"></span></h2>
     </div>
     <div class="list-store col-xs-12">
         <ul class="list-store-container disable-ul"
             data-mage-init='{
                 "magestore/liststore": {
-                    "defaultStoreIcon": "<?php echo $block->getViewFileUrl('Magestore_Storepickup::images/map_with_pin.png')?>",
+                    "defaultStoreIcon": "<?php echo $block->getViewFileUrl('Magestore_Storepickup::images/map_with_pin.png') ?>",
                     "mediaUrlImage": "<?php echo $block->getMediaUrlImage() ?>",
                     "distanceUnit": "<?php echo $block->getSystemConfig()->getDistanceUnit() ?>"
                 }
@@ -92,7 +98,9 @@
                 <p class="text-center"><%- data.distanceText %></p>
             </div>
             <div class="col-sm-9 col-xs-9 tag-content">
-                <h4><a target="_blank" class="title-store" href="<?php echo $block->getBaseUrl() ?><%- data.rewrite_request_path %>"><%- data.store_name %></a></h4>
+                <h4><a target="_blank" class="title-store"
+                       href="<?php echo $block->getBaseUrl() ?><%- data.rewrite_request_path %>"><%- data.store_name
+                        %></a></h4>
                 <p class="address-store"><%- data.address %></p>
                 <p class="phone-store"><%- data.phone %></p>
                 <p>
@@ -118,7 +126,9 @@
                 <p class="text-center"><%- data.distanceText %></p>
             </div>
             <div class="col-sm-9 col-xs-9 tag-content">
-                <h4><a target="_blank" class="title-store" href="<?php echo $block->getBaseUrl() ?><%- data.rewrite_request_path %>"><%- data.store_name %></a></h4>
+                <h4><a target="_blank" class="title-store"
+                       href="<?php echo $block->getBaseUrl() ?><%- data.rewrite_request_path %>"><%- data.store_name
+                        %></a></h4>
                 <p class="address-store"><%- data.address %></p>
                 <p class="phone-store"><%- data.phone %></p>
                 <p>

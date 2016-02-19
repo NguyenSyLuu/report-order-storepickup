@@ -114,23 +114,29 @@
                 </div>
             </div>
             <?php endif; ?>
+
             <div class="search-filter col-full padding-right padding-left">
                 <ul id="list-tag-ul"
                     class="list-inline list-tag-ul col-full"
                     data-mage-init='{"magestore/tag": {"btnCheckAll": ".btn-check-all", "btnUnCheckAll": ".btn-un-check-all"}}'
                 >
+                    <?php if(count($block->getTagCollection())!=0):?>
                     <?php foreach ($block->getTagCollection() as $tag) : ?>
                     <li title="<?php echo $tag->getTagName() ?>" data-tag-id="<?php echo $tag->getId() ?>" class="tag-icon icon-filter text-center">
                         <img src="<?php echo $block->getTagIcon($tag) ?>" class="img-responsive"/>
                         <p><?php echo $tag->getTagName() ?></p>
                     </li>
                     <?php endforeach; ?>
+                    <?php endif;?>
                 </ul>
+                <?php if(count($block->getTagCollection())!=0):?>
                 <div class="btn-select pull-right text-right">
                     <button class="btn-check-all action primary" title="<?php echo __('Select All')?>"><span><?php echo __('Select All')?></span></button>
                     <button class="btn-un-check-all action primary" style="display: none;" title="<?php echo __('Un Select All')?>"><span><?php echo __('Un Select All')?></span></button>
                 </div>
+                <?php endif;?>
             </div>
+
         </div>
     </div>
 </div>

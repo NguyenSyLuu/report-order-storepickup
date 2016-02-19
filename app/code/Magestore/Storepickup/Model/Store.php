@@ -28,7 +28,7 @@ use Magento\UrlRewrite\Model\UrlPersistInterface;
 
 /**
  * Model Store.
- *
+ * @method \Magestore\Storepickup\Model\ResourceModel\Store _getResource()
  * @category Magestore
  * @package  Magestore_Storepickup
  * @module   Storepickup

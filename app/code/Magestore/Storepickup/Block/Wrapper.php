@@ -32,6 +32,8 @@ class Wrapper extends \Magestore\Storepickup\Block\AbstractBlock
 {
     protected $_template = 'Magestore_Storepickup::wrapper.phtml';
 
+    protected $_storeCollectionFactory;
+
     /**
      * Block constructor.
      *
@@ -40,9 +42,16 @@ class Wrapper extends \Magestore\Storepickup\Block\AbstractBlock
      */
     public function __construct(
         \Magestore\Storepickup\Block\Context $context,
+        \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory,
         array $data = []
     ) {
         parent::__construct($context, $data);
+        $this->_storeCollectionFactory = $storeCollectionFactory;
+    }
+
+    public function _prepareLayout()
+    {
+        return parent::_prepareLayout();
     }
 
     public function getDataMageIniDate()
@@ -59,5 +68,14 @@ class Wrapper extends \Magestore\Storepickup\Block\AbstractBlock
                 'buttonText' => 'Select Date',
             ]
         );
+    }
+
+    public function getListStore()
+    {
+        /** @var \Magestore\Storepickup\Model\ResourceModel\Store\Collection $collection */
+        $collection = $this->_storeCollectionFactory->create();
+        $collection->addFieldToSelect(['storepickup_id', 'store_name','address']);
+
+        return \Zend_Json::encode($collection->getData());
     }
 }
