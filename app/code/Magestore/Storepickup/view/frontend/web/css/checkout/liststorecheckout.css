@@ -1473,7 +1473,7 @@ h2.title-page {
 }
 
 .storepickup-wrapper .search-box .search-filter {
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .storepickup-wrapper .search-box .search-filter ul > li > input {
@@ -2034,9 +2034,12 @@ h2.title-page {
     width: 80% !important;
 }
 
-.modal-footer {
+.modal-header {
     display: none;
     padding: 3px !important;
+}
+.modal-footer{
+    padding: 1px !important;
 }
 
 .modal-content {
@@ -2046,7 +2049,10 @@ h2.title-page {
 .modal-slide._inner-scroll .modal-header {
     padding: 10px !important;
 }
-
+.modal-popup._show .modal-inner-wrap{
+    border-top-left-radius:8px;
+    border-top-right-radius:8px;
+}
 #select_store_by_map {
     color: #1979c3;
     text-decoration: none;
@@ -2055,4 +2061,7 @@ h2.title-page {
 #select_store_by_map:hover {
     color: #006bb4;
     text-decoration: underline;
+}
+.ajax-loading-image {
+    width: 20px;
 }

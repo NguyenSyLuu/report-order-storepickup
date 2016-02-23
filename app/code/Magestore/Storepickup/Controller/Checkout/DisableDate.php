@@ -33,54 +33,53 @@ class DisableDate extends \Magento\Framework\App\Action\Action
      */
     protected $_checkoutSession;
     /**
-     * @var \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory
+     * @var \Magestore\Storepickup\Model\StoreFactory
      */
-    protected $_storeCollectionFactory;
+    protected $_storeCollection;
     /**
-     * @var \Magestore\Storepickup\Model\ResourceModel\Holiday\CollectionFactory
+     * @var \Magento\Framework\Stdlib\DateTime\DateTime
      */
-    protected $_holidayCollectionFactory;
-    /**
-     * @var \Magestore\Storepickup\Model\ResourceModel\Schedule\CollectionFactory
-     */
-    protected $_scheduleCollectionFactory;
+    protected $_formatdate;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-        \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory,
-        \Magestore\Storepickup\Model\ResourceModel\Holiday\CollectionFactory $holidayCollectionFactory,
-        \Magestore\Storepickup\Model\ResourceModel\Schedule\CollectionFactory $scheduleCollectionFactory,
+        \Magestore\Storepickup\Model\StoreFactory $storeCollection,
+        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $gmtdate,
         \Magento\Checkout\Model\Session $checkoutSession
     )
     {
-        parent::__construct($context);
+
         $this->_resultJsonFactory = $resultJsonFactory;
-        $this->_storeCollectionFactory = $storeCollectionFactory;
-        $this->_holidayCollectionFactory = $holidayCollectionFactory;
-        $this->_scheduleCollectionFactory = $scheduleCollectionFactory;
+        $this->_storeCollection = $storeCollection;
         $this->_checkoutSession = $checkoutSession;
+        $this->_formatdate = $gmtdate;
+        parent::__construct($context);
     }
     public function execute()
     {
         $date = array();
-        $holiday_date = array();
-        $specialday_date = array();
         $closed = array();
+        $holiday_date = array();
         $storeId = $this->getRequest()->getParam('store_id');
-        $collectionstore = $this->_storeCollectionFactory->create();
-        $collectionschdule = $this->_scheduleCollectionFactory->create();
-        $collectionsholidays = $this->_holidayCollectionFactory->create();
-        $store = $collectionstore->addFieldToFilter('storepickup_id',$storeId)->getFirstItem();
-        $scheduleID = $store->getScheduleId();
-        $schedule= $collectionschdule->addFieldToFilter('schedule_id',$scheduleID)->getFirstItem();
-
-        if ($storeId == '') {
-            $closed = array(1, 2, 3, 4, 5, 6, 0);
+        $collectionstore = $this->_storeCollection->create();
+        $store = $collectionstore->load($storeId,'storepickup_id');
+        $holidaysdata = $store->getHolidaysData();
+        foreach($holidaysdata as $holidays){
+            foreach($holidays['date'] as $_date){
+                $holiday_date[]=date("m/d/Y", strtotime($_date));
+            }
         }
-        $date['specialdate'] = $specialday_date;
-        $date['holidaydate'] = $holiday_date;
-        $date['closed'] = $closed;
-        return $this->getResponse()->setBody(\Zend_Json::encode($schedule));
+        if(!$store->isOpenday('monday')) $closed[]=1;
+        if(!$store->isOpenday('tuesday')) $closed[]=2;
+        if(!$store->isOpenday('wednesday')) $closed[]=3;
+        if(!$store->isOpenday('thursday')) $closed[]=4;
+        if(!$store->isOpenday('friday')) $closed[]=5;
+        if(!$store->isOpenday('saturday')) $closed[]=6;
+        if(!$store->isOpenday('sunday')) $closed[]=0;
+        $date['holiday'] = $holiday_date;
+        $date['schedule'] = $closed;
+
+        return $this->getResponse()->setBody(\Zend_Json::encode($date));
     }
 }

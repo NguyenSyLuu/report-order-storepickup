@@ -21,7 +21,7 @@
 
 namespace Magestore\Storepickup\Controller\Checkout;
 
-class ChangeStore extends \Magento\Framework\App\Action\Action
+class ChangeTime extends \Magento\Framework\App\Action\Action
 {
     /**
      * @var \Magento\Framework\Controller\Result\JsonFactory
@@ -46,7 +46,8 @@ class ChangeStore extends \Magento\Framework\App\Action\Action
     }
     public function execute()
     {
-        $storepickup_session = array('store_id' => $_POST['store_id'],'store_name'=>$_POST['store_name'],'store_address'=>$_POST['store_address']);
+        $storepickup_session = $this->_checkoutSession->getData('storepickup_session');
+        $storepickup_session['shipping_time'] = $this->getRequest()->getParam('shipping_time');
         $this->_checkoutSession->setData('storepickup_session',$storepickup_session);
         return $this->getResponse()->setBody(\Zend_Json::encode($storepickup_session));
     }

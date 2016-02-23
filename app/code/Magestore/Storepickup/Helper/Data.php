@@ -145,4 +145,31 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $this->_sessionData;
     }
+    public function generateTimes($mintime, $maxtime, $sys_min_time = '0:0', $interval_time = 30)
+    {
+
+        //$sys_min_time = strtotime(date('H:i:s',$sys_min_time));
+        $timeHI = explode(':', $mintime);
+        $mintime= mktime($timeHI[0], $timeHI[1], 0, '01', '01', '2000');
+        $timeHI = explode(':', $maxtime);
+        $maxtime= mktime($timeHI[0], $timeHI[1], 0, '01', '01', '2000');
+        $timeHI = explode(':', $sys_min_time);
+        $sys_min_time= mktime($timeHI[0], $timeHI[1], 0, '01', '01', '2000');
+        $listTime = "";
+
+        $i = $mintime;
+
+        while ($i <= $maxtime) {
+            if ($i >= $sys_min_time) {
+                $time = date('H:i', $i);
+                $listTime .= '<option value="' . $time . '">' . $time . '</option>';
+                //$listTime[$time] = $time;
+            }
+
+            $i += $interval_time*60;
+        }
+
+        return $listTime;
+    }
+
 }

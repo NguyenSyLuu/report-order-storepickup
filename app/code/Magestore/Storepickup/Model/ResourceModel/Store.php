@@ -399,4 +399,5 @@ class Store extends \Magestore\Storepickup\Model\ResourceModel\AbstractResource
 
         return $this;
     }
+
 }

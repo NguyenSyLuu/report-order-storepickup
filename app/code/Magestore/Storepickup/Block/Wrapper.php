@@ -54,22 +54,6 @@ class Wrapper extends \Magestore\Storepickup\Block\AbstractBlock
         return parent::_prepareLayout();
     }
 
-    public function getDataMageIniDate()
-    {
-        $dateFormat = $this->_localeDate->getDateFormat(\IntlDateFormatter::SHORT);
-        $timeFormat = $this->_localeDate->getTimeFormat(\IntlDateFormatter::SHORT);
-
-        return json_encode(
-            [
-                'dateFormat' => $dateFormat,
-                'showsTime' => false,
-                'timeFormat' => $timeFormat,
-                'buttonImage' => null,
-                'buttonText' => 'Select Date',
-            ]
-        );
-    }
-
     public function getListStore()
     {
         /** @var \Magestore\Storepickup\Model\ResourceModel\Store\Collection $collection */
