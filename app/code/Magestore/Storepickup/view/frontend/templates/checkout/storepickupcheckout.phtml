@@ -18,8 +18,8 @@
         + '<select style="display:none;" id="shipping_time" name="shipping_time" class="validate-select"></select>'
         + '</div>'
         +save_ajax_loading_wait;
-    var defaultStore= <?php echo $block->getSystemConfig()->getDefaultStore() ?>;
-    var isDisplayPickuptime= <?php echo $block->getSystemConfig()->isDisplayPickuptime() ?>;
+    var defaultStore= '<?php echo $block->getSystemConfig()->getDefaultStore() ?>';
+    var isDisplayPickuptime= '<?php echo $block->getSystemConfig()->isDisplayPickuptime() ?>';
 
     require(
         [
