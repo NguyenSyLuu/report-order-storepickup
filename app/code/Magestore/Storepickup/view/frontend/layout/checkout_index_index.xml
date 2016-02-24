@@ -32,21 +32,6 @@
                     <item name="components" xsi:type="array">
                         <item name="checkout" xsi:type="array">
                             <item name="children" xsi:type="array">
-                                <!--<item name="sidebar" xsi:type="array">-->
-                                <!--<item name="children" xsi:type="array">-->
-                                <!--<item name="shipping-information" xsi:type="array">-->
-                                <!--&lt;!&ndash;<item name="children" xsi:type="array">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<item name="totals" xsi:type="array">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<item name="children" xsi:type="array">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<item name="shipping" xsi:type="array">&ndash;&gt;-->
-                                <!--<item name="component" xsi:type="string">Magestore_Storepickup/js/checkout/storepickup-decription</item>-->
-                                <!--</item>-->
-                                <!--&lt;!&ndash;</item>&ndash;&gt;-->
-                                <!--&lt;!&ndash;</item>&ndash;&gt;-->
-                                <!--&lt;!&ndash;</item>&ndash;&gt;-->
-                                <!--&lt;!&ndash;</item>&ndash;&gt;-->
-                                <!--</item>-->
-                                <!--</item>-->
                                 <item name="steps" xsi:type="array">
                                     <item name="children" xsi:type="array">
                                         <item name="billing-step" xsi:type="array">

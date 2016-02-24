@@ -85,6 +85,12 @@ class InstallSchema implements InstallSchemaInterface
             ['nullable' => false, 'default' => ''],
             'Schedule Name'
         )->addColumn(
+            'time_interval',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            ['nullable' => false, 'default' => ''],
+            'Schedule Name'
+        )->addColumn(
             'monday_status',
             \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
             null,

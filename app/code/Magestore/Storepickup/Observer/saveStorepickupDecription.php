@@ -73,7 +73,7 @@ class saveStorepickupDecription implements ObserverInterface
                 $new = $order->getShippingDescription();
                 if ($this->_checkoutSession->getData('storepickup_session')) {
                     $storepickup_session = $this->_checkoutSession->getData('storepickup_session');
-                    $new .= $storepickup_session['store_id'] . __('Store name :') . $storepickup_session['store_name'] . __('Store address :') . $storepickup_session['store_address'] . __('Pickup date :') . $storepickup_session['shipping_date'] . __('Pickup time :') . $storepickup_session['shipping_time'];
+                    $new .= ('Pickup date :') . $storepickup_session['shipping_date']."  " .__('Pickup time :') . $storepickup_session['shipping_time'];
                 }
 
                 $order->setShippingDescription($new);

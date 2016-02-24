@@ -23,6 +23,16 @@ define(
 
             return $wrapperelectHtml;
         }
+        quote.paymentMethod.subscribe(function () {
+            if (quote.shippingMethod().carrier_code == 'storepickup'){
+                $('.payment-method-billing-address').html("Pickup at Store: <br/>"+$('.info-store-checkout').html());
+                $('.ship-to .shipping-information-content').html($('.info-store-checkout').html());
+                if(isDisplayPickuptime){
+                    storePickupreview= '<div class="storePickupreview">'+'Pickup Date:'+$('#shipping_date').val()+"<br/>"+ 'Pickup Time:'+$('#shipping_time').val()+'</div>';
+                    if(!($('.storePickupreview').length>0))$('.ship-via .shipping-information-content').append(storePickupreview);
+                }
+            }
+        }, this);
 
         quote.shippingMethod.subscribe(function (value) {
             if (quote.shippingMethod().carrier_code == 'storepickup') {
@@ -50,11 +60,11 @@ define(
                     } else if(isDisplayPickuptime) $('#checkout-shipping-method-load').append(storepickup_date_box);
                     $.each(liststoreJson, function (index, el) {
                         if (el.storepickup_id == $('.list-store-container').val()) {
-                            var store_information = '<label class= "title-store">' + $t('Store name: ') + el.store_name + '</label><br/>' + '<p>' + $t('Store address: ') + el.address + '</p>';
+                            var store_information = '<h3>' + el.store_name + '</h3><br/>' + '<p>' + $t('Store address: ') + el.address + '</p>'+'<p>' + $t('Store Phone: ') + el.phone + '</p>';
                             if ($('.info-store-checkout').length > 0) {
                                 $('.info-store-checkout').html(store_information);
                             } else {
-                                var info_store = '<div class ="info-store-checkout">' + '<label class= "title-store">' + $t('Store name: ') + el.store_name + '</label><br/>' + '<p>' + $t('Store address: ') + el.address + '</p>' + '</div>';
+                                var info_store = '<div class ="info-store-checkout">' + '<h3>'+ el.store_name + '</h3><br/>' + '<p>' + $t('Store address: ') + el.address + '</p>'+'<p>' + $t('Store Phone: ') + el.phone + '</p>' + '</div>';
                                 $('#select_store_by_map').after(info_store);
                             }
                             $.ajax(
@@ -68,6 +78,7 @@ define(
                                         store_address: el.address
                                     },
                                     success: function (result) {
+                                        storePikcupsession = $('.list-store-container').val();
                                         if(isDisplayPickuptime) showInputDateBox(); else $('#shipping-method-buttons-container').show();
                                     }
                                 });
@@ -142,28 +153,36 @@ define(
                     success: function (result) {
                         result = $.parseJSON(result);
                         $('#shipping_time').html("");
-                        if(!result.error) $('#shipping_time').append(result.html);
-                        $('#shipping_time').show();
-                        $('.time-ajax-loading-wait').hide();
+                        var selecttime='<option value="-1">Select time to pickup</option>';
+                        if(!result.error)
+                        {
+                            $('#shipping_time').append(selecttime+result.html);
+                            $('#shipping_time').show();
+                            $('.time-ajax-loading-wait').hide();
+                        } else alert(result.error);
+
                     }
                 });
 
             $("#shipping_time").change(function()
             {
-                $('.save-ajax-loading-wait').show();
-                $.ajax(
-                    {
-                        url: url.build("storepickup/checkout/changetime"),
-                        type: "post",
-                        dateType: "json",
-                        data: {
-                            shipping_time: $("#shipping_time").val()
-                        },
-                        success: function (result) {
-                            $('#shipping-method-buttons-container').show();
-                            $('.save-ajax-loading-wait').hide();
-                        }
-                    });
+                if($("#shipping_time").val()!='-1')
+                {
+                    $('.save-ajax-loading-wait').show();
+                    $.ajax(
+                        {
+                            url: url.build("storepickup/checkout/changetime"),
+                            type: "post",
+                            dateType: "json",
+                            data: {
+                                shipping_time: $("#shipping_time").val()
+                            },
+                            success: function (result) {
+                                $('#shipping-method-buttons-container').show();
+                                $('.save-ajax-loading-wait').hide();
+                            }
+                        });
+                }
             });
         }
     });

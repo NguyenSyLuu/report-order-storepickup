@@ -81,6 +81,7 @@ class ChangeDate extends \Magento\Framework\App\Action\Action
         $hasBreakTime= $store->hasBreakTime($dayofweek);
         // check special days
         $specialsData = $store->getSpecialdaysData();
+        $isSpecialday = false;
         foreach($specialsData as $specialID){
                 $isSpecialday = array_search($shippingDate, $specialID['date'],false);
             if($isSpecialday) {
