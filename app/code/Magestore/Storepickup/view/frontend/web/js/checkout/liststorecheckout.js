@@ -126,44 +126,8 @@ define([
             storeItem.find('.btn-link.apply').click(function () {
                 var $store = $(this).parents('.store-item');
                 $('#popup-mpdal').modal('closeModal');
-                $('.list-store-container').val($store.data('store-id'));
-                var liststoreJson = window.liststoreJson;
-                $.each(liststoreJson, function (index, el) {
-                    if (el.storepickup_id == $('.list-store-container').val()) {
-                        var $store_information = $('<label class= "title-store">' + $t('Store name: ') + el.store_name + '</label><br/>' + '<p>' + $t('Store address: ') + el.address + '</p>');
-                        if ($('.info-store-checkout').length > 0) {
-                            $('.info-store-checkout').html($store_information);
-                        } else {
-                            var $info_store = $('<div class ="info-store-checkout">' + '<label class= "title-store">' + $t('Store name: ') + el.store_name + '</label><br/>' + '<p>' + $t('Store address: ') + el.address + '</p>' + '</div>');
-                            $('#select_store_by_map').after($info_store);
-                        }
-                    }
-                });
-                $.ajax({
-                    url: url.build("storepickup/checkout/changestore"),
-                    type: "post",
-                    dateType: "text",
-                    data: {
-                        store_id: $store.data('store-id'),
-                        store_name: $store.data('store-name'),
-                        store_address: $store.data('address')
-                    },
-                    success: function (result) {
-                        window.console.log(result);
-                    }
-                });
-                $.ajax(
-                    {
-                        url: url.build("storepickup/checkout/disabledate"),
-                        type: "post",
-                        dateType: "text",
-                        data: {
-                            store_id: $('.list-store-container').val()
-                        },
-                        success: function (result) {
-                            window.console.log(result);
-                        }
-                    });
+                $('.list-store-container').val($store.data('store-id')).trigger('change');
+
             });
             storeItem.find('.btn-link.street-view').click(function () {
                 var $store = $(this).parents('.store-item');

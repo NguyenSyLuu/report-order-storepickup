@@ -141,7 +141,8 @@ define(
                     },
                     success: function (result) {
                         result = $.parseJSON(result);
-                        $('#shipping_time').append(result);
+                        $('#shipping_time').html("");
+                        if(!result.error) $('#shipping_time').append(result.html);
                         $('#shipping_time').show();
                         $('.time-ajax-loading-wait').hide();
                     }
