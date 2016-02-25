@@ -15,7 +15,7 @@
  * version in the future.
  *
  * @category    Magestore
- * @package     Magestore_OneStepCheckout
+ * @package     Magestore_StorePickup
  * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
  * @license     http://www.magestore.com/license-agreement.html
  */
@@ -29,8 +29,8 @@ use Symfony\Component\Config\Definition\Exception\Exception;
  * Class GiftMessageConfigObserver
  *
  * @category Magestore
- * @package  Magestore_OneStepCheckout
- * @module   OneStepCheckout
+ * @package  Magestore_StorePickup
+ * @module   StorePickup
  * @author   Magestore Developer
  */
 class saveStorepickupDecription implements ObserverInterface
@@ -71,9 +71,10 @@ class saveStorepickupDecription implements ObserverInterface
             $order = $observer->getEvent()->getOrder();
             if($order->getShippingMethod(true)->getCarrierCode()=="storepickup") {
                 $new = $order->getShippingDescription();
+                $null="";
                 if ($this->_checkoutSession->getData('storepickup_session')) {
                     $storepickup_session = $this->_checkoutSession->getData('storepickup_session');
-                    $new .= ('Pickup date :') . $storepickup_session['shipping_date']."  " .__('Pickup time :') . $storepickup_session['shipping_time'];
+                    $new .= "<p>".__('Pickup date').' : ' . $storepickup_session['shipping_date'].'<p>' .__('Pickup time'). ' : ' . $storepickup_session['shipping_time'].'</p><img src="http://maps.google.com/maps/api/staticmap?center='.$storepickup_session['latitude']. ',' . $storepickup_session['longitude'] . '&zoom=15&size=200x200&markers=color:red|label:S|' . $storepickup_session['latitude'] . ',' . $storepickup_session['longitude'] . '&sensor=false" />';
                 }
 
                 $order->setShippingDescription($new);

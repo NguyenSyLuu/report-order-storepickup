@@ -126,7 +126,7 @@ define([
             storeItem.find('.btn-link.apply').click(function () {
                 var $store = $(this).parents('.store-item');
                 $('#popup-mpdal').modal('closeModal');
-                $('.list-store-container').val($store.data('store-id')).trigger('change');
+                $('.list-store-select').val($store.data('store-id')).trigger('change');
 
             });
             storeItem.find('.btn-link.street-view').click(function () {
