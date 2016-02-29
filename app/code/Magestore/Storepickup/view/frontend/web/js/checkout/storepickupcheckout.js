@@ -13,7 +13,7 @@ define(
         function getSelectListStoreHtml() {
             var $wrapperelectHtml = $('<div class="list-store-to-pickup"><label>' + $t('Select Store:') + '</label></div>');
             var $selectStoreHtml = $('<select class="list-store-select disable-ul"></select>');
-            $selectStoreHtml.append('<option class="show-tag-li store-item" value="0">' + $t('Select a store to pickup') + '</option>');
+            $selectStoreHtml.append('<option class="show-tag-li store-item" value="-1">' + $t('Select a store to pickup') + '</option>');
             $.each(liststoreJson, function (index, el) {
                 $selectStoreHtml.append('<option class="show-tag-li store-item" value="' + el.storepickup_id + '">' + el.store_name + '</option>');
             });
@@ -95,6 +95,7 @@ define(
                         });
 
                     });
+                    $('.list-store-select').val(defaultStore).trigger('change');
 
                 } else {
                     $('.storepickup-information').show();

@@ -162,7 +162,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="format_time" translate="label" type="select" sortOrder="94" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Time Format</label>
+                    <label>Inta</label>
                     <source_model>Magestore\Storepickup\Model\Config\Source\FormatTime</source_model>
                 </field>
                 <field id="specificerrmsg" translate="label" type="textarea" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">

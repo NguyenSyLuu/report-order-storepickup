@@ -31,6 +31,10 @@ namespace Magestore\Storepickup\Block;
 class Wrapper extends \Magestore\Storepickup\Block\AbstractBlock
 {
     protected $_template = 'Magestore_Storepickup::wrapper.phtml';
+    /**
+     * @var \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory
+     *
+     */
 
     protected $_storeCollectionFactory;
 

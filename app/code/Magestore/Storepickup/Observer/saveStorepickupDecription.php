@@ -66,15 +66,15 @@ class saveStorepickupDecription implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+        //die('asdasd');
         try {
             /** @var \Magento\Sales\Model\Order $order */
             $order = $observer->getEvent()->getOrder();
             if($order->getShippingMethod(true)->getCarrierCode()=="storepickup") {
                 $new = $order->getShippingDescription();
-                $null="";
                 if ($this->_checkoutSession->getData('storepickup_session')) {
-                    $storepickup_session = $this->_checkoutSession->getData('storepickup_session');
-                    $new .= "<p>".__('Pickup date').' : ' . $storepickup_session['shipping_date'].'<p>' .__('Pickup time'). ' : ' . $storepickup_session['shipping_time'].'</p><img src="http://maps.google.com/maps/api/staticmap?center='.$storepickup_session['latitude']. ',' . $storepickup_session['longitude'] . '&zoom=15&size=200x200&markers=color:red|label:S|' . $storepickup_session['latitude'] . ',' . $storepickup_session['longitude'] . '&sensor=false" />';
+                    $storepickup_session = $this->_checkoutSession->getData('storepickup_session',true);
+                    if(isset($storepickup_session['shipping_date']) && isset($storepickup_session['shipping_time'])) $new .= "<p>".__('Pickup date').' : ' . $storepickup_session['shipping_date'].'</p><p>' .__('Pickup time'). ' : ' . $storepickup_session['shipping_time'].'</p><img src="http://maps.google.com/maps/api/staticmap?center='.$storepickup_session['latitude']. ',' . $storepickup_session['longitude'] . '&zoom=15&size=200x200&markers=color:red|label:S|' . $storepickup_session['latitude'] . ',' . $storepickup_session['longitude'] . '&sensor=false" /><p></p>';
                 }
 
                 $order->setShippingDescription($new);

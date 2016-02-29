@@ -62,6 +62,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_backendHelperJs;
 
     /**
+     * @var \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory
+     *
+     */
+    protected $_storeCollectionFactory;
+
+    /**
      * Block constructor.
      *
      * @param \Magento\Framework\App\Helper\Context $context
@@ -72,6 +78,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Backend\Block\Widget\Grid\Column\Renderer\Options\Converter $converter,
         \Magento\Backend\Helper\Js $backendHelperJs,
         \Magento\Backend\Model\Session $backendSession,
+        \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory,
         \Magestore\Storepickup\Model\StoreFactory $storeFactory
     ) {
         parent::__construct($context);
@@ -79,6 +86,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->_converter = $converter;
         $this->_storeFactory = $storeFactory;
         $this->_backendHelperJs = $backendHelperJs;
+        $this->_storeCollectionFactory = $storeCollectionFactory;
         $this->_backendSession = $backendSession;
     }
 
@@ -144,6 +152,34 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $this->_sessionData;
+    }
+    public function getDefaultStore()
+    {
+        return $this->scopeConfig->getValue('carriers/storepickup/default_store', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+    public function isDisplayPickuptime()
+    {
+        return $this->scopeConfig->getValue('carriers/storepickup/display_pickuptime', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
+    public function getListStore()
+    {
+        /** @var \Magestore\Storepickup\Model\ResourceModel\Store\Collection $collection */
+        $collection = $this->_storeCollectionFactory->create();
+        $collection->addFieldToSelect(['storepickup_id', 'store_name','address','phone','latitude','longitude']);
+
+        return $collection->getData();
+    }
+    public function getListStoreJson()
+    {
+        /** @var \Magestore\Storepickup\Model\ResourceModel\Store\Collection $collection */
+        $collection = $this->_storeCollectionFactory->create();
+        $collection->addFieldToSelect(['storepickup_id', 'store_name','address','phone','latitude','longitude','city','state','zipcode','country_id','fax']);
+
+        return \Zend_Json::encode($collection->getData());
+    }
+    public function getChangeTimeURL()
+    {
+        return $this->getURL('storepickup/checkout/changedate');
     }
     public function generateTimes($mintime, $maxtime, $sys_min_time = '0:0', $interval_time = 30)
     {
