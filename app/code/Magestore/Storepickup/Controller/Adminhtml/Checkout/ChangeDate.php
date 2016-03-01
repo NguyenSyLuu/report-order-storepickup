@@ -73,7 +73,7 @@ class ChangeDate extends \Magento\Framework\App\Action\Action
         $shippingDate = date('Y-m-d',strtotime($shippingDateString));
         $dayofweek= strtolower (date('l', strtotime($shippingDate)));
         // save pickup date to data
-        $storepickup_session = $this->_backendSession->getData('storepickup');
+        $storepickup_session = $this->_backendSession->getData('storepickup ');
         $storepickup_session['shipping_date'] = $shippingDate;
         $this->_backendSession->setData('storepickup',$storepickup_session);
         $collectionstore = $this->_storeCollection->create();

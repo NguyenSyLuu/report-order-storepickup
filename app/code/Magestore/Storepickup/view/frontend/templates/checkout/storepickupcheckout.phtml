@@ -2,22 +2,15 @@
 /** @var \Magestore\Storepickup\Block\Wrapper $block */
 ?>
 <script type="text/javascript">
-    var icon_src_loading_wait = '<?php echo $block->getViewFileUrl("Magestore_Storepickup::images/opc-ajax-loader.gif") ?>';
-    var time_ajax_loading_wait = '<span class="time-ajax-loading-wait" style="position: relative;">'+ '<img  src="'+ icon_src_loading_wait + '" class="ajax-loading-image"> '+'<?php echo __("Loading") ?>... </span>';
-    var date_ajax_loading_wait = '<span class="date-ajax-loading-wait" style="position: relative;">'+ '<img  src="'+ icon_src_loading_wait + '" class="ajax-loading-image"> '+'<?php echo __("Loading") ?>... </span>';
-    var save_ajax_loading_wait = '<span class="save-ajax-loading-wait" style="position: relative;display:none;">'+ '<img  src="'+ icon_src_loading_wait + '" class="ajax-loading-image"> '+'<?php echo __("Saving") ?>... </span>';
     var select_store_by_map ='<div id="select_store_by_map" ><?php echo __("Select store by map") ?></div>';
     var storepickup_date_box = '<div id="shipping_date_div" class="storepickup-box col-sm-6 col-xs-12"> Please select Pickup Date/Time to go next step!<br/>'
         + '<label class="required" for="shipping_date"><?php echo __("Pickup Date :") ?> </label>'
-        + date_ajax_loading_wait
-        + '<input name="shipping_date" style="display:none;" type="text" id="shipping_date" value="" class="input-text required-entry form-control" readonly>'
+         + '<input name="shipping_date" style="display:none;" type="text" id="shipping_date" value="" class="input-text required-entry form-control" readonly>'
         + '</div>' +'<br />';
     var storepickup_time_box = '<div id="shipping_time_div" class="storepickup-box col-sm-6 col-xs-12">'
         + '<label class="required" for="shipping_time"><?php echo __("Pickup Time :") ?>  </label>'
-        + time_ajax_loading_wait
         + '<select style="display:none;" id="shipping_time" name="shipping_time" class="validate-select"></select>'
-        + '</div>'
-        +save_ajax_loading_wait;
+        + '</div>';
     var defaultStore= '<?php echo $block->getSystemConfig()->getDefaultStore() ?>';
     var isDisplayPickuptime= '<?php echo $block->getSystemConfig()->isDisplayPickuptime() ?>';
     var storePikcuplatitude="";
@@ -57,4 +50,7 @@
 
 <div id="popup-mpdal" class="storepickup-wrapper col-full" style="display: none;">
     <?php echo $block->getChildHtml('storepickupCheckout.gmapstore') ?>
+</div>
+<div class="overlay-bg-checkout" style="display: none">
+    <img src="<?php echo $block->getViewFileUrl('Magestore_Storepickup::images/ajax-loader.gif') ?>" alt="overlay" />
 </div>

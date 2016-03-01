@@ -66,7 +66,6 @@ class saveStorepickupDecription implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        //die('asdasd');
         try {
             /** @var \Magento\Sales\Model\Order $order */
             $order = $observer->getEvent()->getOrder();
@@ -74,38 +73,34 @@ class saveStorepickupDecription implements ObserverInterface
                 $new = $order->getShippingDescription();
                 if ($this->_checkoutSession->getData('storepickup_session')) {
                     $storepickup_session = $this->_checkoutSession->getData('storepickup_session',true);
-                    if(isset($storepickup_session['shipping_date']) && isset($storepickup_session['shipping_time'])) $new .= "<p>".__('Pickup date').' : ' . $storepickup_session['shipping_date'].'</p><p>' .__('Pickup time'). ' : ' . $storepickup_session['shipping_time'].'</p><img src="http://maps.google.com/maps/api/staticmap?center='.$storepickup_session['latitude']. ',' . $storepickup_session['longitude'] . '&zoom=15&size=200x200&markers=color:red|label:S|' . $storepickup_session['latitude'] . ',' . $storepickup_session['longitude'] . '&sensor=false" /><p></p>';
+                    if(isset($storepickup_session['shipping_date']) && isset($storepickup_session['shipping_time'])) $new .= '<br>'.__('Pickup date').' : ' . $storepickup_session['shipping_date'] .'<br>'.__('Pickup time'). ' : ' . $storepickup_session['shipping_time'].'<br>'.'<img src="http://maps.google.com/maps/api/staticmap?center='.$storepickup_session['latitude']. ',' . $storepickup_session['longitude'] . '&zoom=15&size=200x200&markers=color:red|label:S|' . $storepickup_session['latitude'] . ',' . $storepickup_session['longitude'] . '&sensor=false" />';
+                    $order->setShippingDescription($new);
+                    $datashipping = array();
+                    $storeId = $storepickup_session['store_id'];
+                    $collectionstore = $this->_storeCollection->create();
+                    $store = $collectionstore->load($storeId, 'storepickup_id');
+                    $datashipping['firstname'] = __('Store');
+                    $datashipping['lastname'] = $store->getData('store_name');
+                    $datashipping['street'][0] = $store->getData('address');
+                    $datashipping['city'] = $store->getCity();
+                    $datashipping['region'] = $store->getState();
+                    $datashipping['postcode'] = $store->getData('zipcode');
+                    $datashipping['country_id'] = $store->getData('country_id');
+                    $datashipping['company'] = '';
+                    if ($store->getFax()) {
+                        $datashipping['fax'] = $store->getFax();
+                    } else {
+                        unset($datashipping['fax']);
+                    }
+                    if ($store->getPhone()) {
+                        $datashipping['telephone'] = $store->getPhone();
+                    } else {
+                        unset($datashipping['telephone']);
+                    }
+                    $datashipping['save_in_address_book'] = 1;
+
+                    $order->getShippingAddress()->addData($datashipping);
                 }
-
-                $order->setShippingDescription($new);
-                $datashipping = array();
-                $storeId = $storepickup_session['store_id'];
-                $collectionstore = $this->_storeCollection->create();
-                $store = $collectionstore->load($storeId, 'storepickup_id');
-                $datashipping['firstname'] = __('Store');
-                $datashipping['lastname'] = $store->getData('store_name');
-                $datashipping['street'][0] = $store->getData('address');
-                $datashipping['city'] = $store->getCity();
-                $datashipping['region'] = $store->getState();
-                $datashipping['postcode'] = $store->getData('zipcode');
-                $datashipping['country_id'] = $store->getData('country_id');
-                $datashipping['company'] = '';
-                if ($store->getFax()) {
-                    $datashipping['fax'] = $store->getFax();
-                } else {
-                    unset($datashipping['fax']);
-                }
-
-                if ($store->getPhone()) {
-                    $datashipping['telephone'] = $store->getPhone();
-                } else {
-                    unset($datashipping['telephone']);
-                }
-
-                $datashipping['save_in_address_book'] = 1;
-
-                $order->getShippingAddress()->addData($datashipping);
-                $order->getShippingAddress()->save();
             }
 
         } catch (Exception $e) {
