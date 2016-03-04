@@ -70,15 +70,21 @@ class saveStorepickupDecription implements ObserverInterface
             /** @var \Magento\Sales\Model\Order $order */
             $order = $observer->getEvent()->getOrder();
             if($order->getShippingMethod(true)->getCarrierCode()=="storepickup") {
-                $new = $order->getShippingDescription();
                 if ($this->_checkoutSession->getData('storepickup_session')) {
+                    $new = $order->getShippingDescription();
                     $storepickup_session = $this->_checkoutSession->getData('storepickup_session',true);
-                    if(isset($storepickup_session['shipping_date']) && isset($storepickup_session['shipping_time'])) $new .= '<br>'.__('Pickup date').' : ' . $storepickup_session['shipping_date'] .'<br>'.__('Pickup time'). ' : ' . $storepickup_session['shipping_time'].'<br>'.'<img src="http://maps.google.com/maps/api/staticmap?center='.$storepickup_session['latitude']. ',' . $storepickup_session['longitude'] . '&zoom=15&size=200x200&markers=color:red|label:S|' . $storepickup_session['latitude'] . ',' . $storepickup_session['longitude'] . '&sensor=false" />';
-                    $order->setShippingDescription($new);
                     $datashipping = array();
                     $storeId = $storepickup_session['store_id'];
                     $collectionstore = $this->_storeCollection->create();
                     $store = $collectionstore->load($storeId, 'storepickup_id');
+                    //set shipping desciption
+                    if(isset($storepickup_session['shipping_date']) &&isset($storepickup_session['shipping_time'])) {
+                        $new .= '<br>'.__('Pickup date').' : ' . $storepickup_session['shipping_date'].'<br>' .__('Pickup time'). ' : ' . $storepickup_session['shipping_time'].'<br><img src="http://maps.google.com/maps/api/staticmap?center='.$store->getData('latitude'). ',' . $store->getData('longitude') . '&zoom=15&size=200x200&markers=color:red|label:S|' . $store->getData('latitude') . ',' . $store->getData('longitude') . '&sensor=false" />';
+                    } else {
+                        $new .= '<br><img src="http://maps.google.com/maps/api/staticmap?center='.$store->getData('latitude'). ',' . $store->getData('longitude') . '&zoom=15&size=200x200&markers=color:red|label:S|' . $store->getData('latitude') . ',' . $store->getData('longitude') . '&sensor=false" />';
+                    }
+                    $order->setShippingDescription($new);
+                    //set shipping address
                     $datashipping['firstname'] = __('Store');
                     $datashipping['lastname'] = $store->getData('store_name');
                     $datashipping['street'][0] = $store->getData('address');

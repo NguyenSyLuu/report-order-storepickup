@@ -46,7 +46,7 @@ class ChangeStore extends \Magento\Framework\App\Action\Action
     }
     public function execute()
     {
-        $storepickup_session = array('store_id' => $_POST['store_id'],'store_name'=>$_POST['store_name'],'store_address'=>$_POST['store_address'],'latitude'=>$_POST['latitude'],'longitude'=>$_POST['longitude']);
+        $storepickup_session = array('store_id' => $this->getRequest()->getParam('store_id'));
         $this->_checkoutSession->setData('storepickup_session',$storepickup_session);
         return $this->getResponse()->setBody(\Zend_Json::encode($storepickup_session));
     }

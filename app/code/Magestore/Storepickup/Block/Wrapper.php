@@ -62,7 +62,7 @@ class Wrapper extends \Magestore\Storepickup\Block\AbstractBlock
     {
         /** @var \Magestore\Storepickup\Model\ResourceModel\Store\Collection $collection */
         $collection = $this->_storeCollectionFactory->create();
-        $collection->addFieldToSelect(['storepickup_id', 'store_name','address','phone','latitude','longitude']);
+        $collection->addFieldToFilter('status','1')->addFieldToSelect(['storepickup_id', 'store_name','address','phone','latitude','longitude']);
 
         return \Zend_Json::encode($collection->getData());
     }

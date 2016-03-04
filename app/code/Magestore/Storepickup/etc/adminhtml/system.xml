@@ -113,7 +113,7 @@
         <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
             <group id="storepickup" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Store Pickup</label>
-                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
@@ -123,52 +123,59 @@
                 <field id="name" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Method Name</label>
                 </field>
-                <field id="price" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="price" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Price</label>
                     <validate>validate-number validate-zero-or-greater</validate>
                 </field>
-                <field id="type" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="type" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Type</label>
                     <source_model>Magestore\Storepickup\Model\Config\Source\Method</source_model>
                 </field>
 
-                <field id="paymentmethod" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="paymentmethod" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Applicable payment method(s)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="selectpaymentmethod" translate="label" type="select" sortOrder="81" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="selectpaymentmethod" translate="label" type="multiselect" sortOrder="81" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Select applicable payment methods</label>
                     <depends>
                         <field id="paymentmethod">1</field>
                     </depends>
-                    <source_model>Magestore\Storepickup\Model\Config\Source\Paymentmethods</source_model>
+                    <source_model>Magestore\Storepickup\Model\Config\Source\PaymentMethods</source_model>
                 </field>
-                <field id="sallowspecific" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="sallowspecific" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Ship to Applicable Countries</label>
                     <frontend_class>shipping-applicable-country</frontend_class>
                     <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
                 </field>
-                <field id="specificcountry" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Ship to Specific Countries</label>
                     <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                     <can_be_empty>1</can_be_empty>
                 </field>
-                <field id="default_store" translate="label" type="select" sortOrder="92" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="default_store" translate="label" type="select" sortOrder="92" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Default Store </label>
                     <source_model>Magestore\Storepickup\Model\Config\Source\DefaultStore</source_model>
                 </field>
-                <field id="display_pickuptime" translate="label" type="select" sortOrder="93" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="display_pickuptime" translate="label" type="select" sortOrder="93" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Display Pickup Time</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="format_time" translate="label" type="select" sortOrder="94" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Inta</label>
-                    <source_model>Magestore\Storepickup\Model\Config\Source\FormatTime</source_model>
+                <field id="time_interval" translate="label" type="select" sortOrder="94" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Time Interval to Pickup</label>
+                    <depends>
+                        <field id="display_pickuptime">1</field>
+                    </depends>
+                    <source_model>Magestore\Storepickup\Model\Config\Source\TimeInterval</source_model>
                 </field>
+                <!--<field id="storeowner_email_template" translate="label" type="select" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                    <!--<label>Email to store owner when pickup order is created</label>-->
+                    <!--<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>-->
+                <!--</field>-->
                 <field id="specificerrmsg" translate="label" type="textarea" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Displayed Error Message</label>
                 </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
                 </field>
             </group>

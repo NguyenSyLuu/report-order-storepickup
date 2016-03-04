@@ -86,7 +86,7 @@
                         <div class="list-store-to-pickup required">
                             <label>Select Store:</label>
                             <select class="list-store-select disable-ul required">
-                                <option class="show-tag-li store-item" value="-1">Select a store to pickup</option>
+                                <option class="show-tag-li store-item" value="">Select a store to pickup</option>
                                 <?php foreach ($liststore as $store):?>
                                     <option class="show-tag-li store-item" value="<?php echo $store["storepickup_id"]?>" class="show-tag-li store-item"><?php echo $store["store_name"]?></option>
                                 <?php endforeach;?>
@@ -158,16 +158,16 @@
     var storepickup_date_box = '<div id="shipping_date_div" class="storepickup-box col-xs-12"> Please select Pickup Date/Time to go next step!<br/>'
         + '<label class="required" for="shipping_date"><?php echo __("Pickup Date :") ?> </label>'
         + date_ajax_loading_wait
-        + '<input name="shipping_date" style="display:none;" type="text" id="shipping_date" value="" class="input-text required-entry form-control" readonly>'
+        + '<input name="shipping_date" style="display:none; width: 180px;" type="text" id="shipping_date" value="" class="input-text required-entry form-control" readonly>'
         + '</div>' +'<br />';
     var storepickup_time_box = '<div id="shipping_time_div" class="storepickup-box col-xs-12">'
         + '<label class="required" for="shipping_time"><?php echo __("Pickup Time :") ?>  </label>'
         + time_ajax_loading_wait
-        + '<select style="display:none;" id="shipping_time" name="shipping_time" class="validate-select"></select>'
+        + '<select style="display:none; width: 180px; margin:10px 0px;" id="shipping_time" name="shipping_time" class="validate-select"></select>'
         + '</div>'
         +save_ajax_loading_wait;
     var defaultStore= '<?php echo $this->helper('Magestore\Storepickup\Helper\Data')->getDefaultStore() ?>';
-    var isDisplayPickuptime= '<?php echo $this->helper('Magestore\Storepickup\Helper\Data')->isDisplayPickuptime() ?>';
+    var isDisplayPickuptime= <?php echo $this->helper('Magestore\Storepickup\Helper\Data')->isDisplayPickuptime() ?>;
     var storePikcuplatitude="";
     var storePikcuplongitude="";
 
@@ -200,11 +200,7 @@
                                 type: "post",
                                 dateType: "text",
                                 data: {
-                                    store_id: $('.list-store-select').val(),
-                                    store_name: el.store_name,
-                                    store_address: el.address,
-                                    latitude: el.latitude,
-                                    longitude: el.longitude
+                                    store_id: $('.list-store-select').val()
                                 },
                                 success: function (result) {
                                     if(isDisplayPickuptime) showInputDateBox();
@@ -226,6 +222,9 @@
                         $('.time-ajax-loading-wait').show();
                         showTimeBox($('#shipping_date').val(),$('.list-store-select').val());
                     });
+                }
+                if($('.list-store-select').val()==""){
+                    $('.info-store-checkout').hide();
                 }
 
             });
@@ -271,6 +270,8 @@
                                 type: "post",
                                 dateType: "json",
                                 data: {
+                                    store_id: $('.list-store-select').val(),
+                                    shipping_date: $('#shipping_date').val(),
                                     shipping_time: $("#shipping_time").val()
                                 },
                                 success: function (result) {
@@ -310,7 +311,14 @@
         }
     );
     window.liststoreJson = <?php echo $this->helper('Magestore\Storepickup\Helper\Data')->getListStoreJson() ?>;
-
-
 </script>
+<style>
+    .list-store-to-pickup.required label::after {
+        color: red;
+        content: "*";
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+</style>
+
 

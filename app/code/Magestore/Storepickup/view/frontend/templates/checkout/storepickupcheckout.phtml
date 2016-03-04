@@ -3,16 +3,16 @@
 ?>
 <script type="text/javascript">
     var select_store_by_map ='<div id="select_store_by_map" ><?php echo __("Select store by map") ?></div>';
-    var storepickup_date_box = '<div id="shipping_date_div" class="storepickup-box col-sm-6 col-xs-12"> Please select Pickup Date/Time to go next step!<br/>'
-        + '<label class="required" for="shipping_date"><?php echo __("Pickup Date :") ?> </label>'
+    var storepickup_date_box = '<div id="shipping_date_div" class="storepickup-box field required"> Please select Pickup Date/Time to go next step!<br/>'
+        + '<label for="shipping_date"><?php echo __("Pickup Date :") ?> </label>'
          + '<input name="shipping_date" style="display:none;" type="text" id="shipping_date" value="" class="input-text required-entry form-control" readonly>'
         + '</div>' +'<br />';
-    var storepickup_time_box = '<div id="shipping_time_div" class="storepickup-box col-sm-6 col-xs-12">'
-        + '<label class="required" for="shipping_time"><?php echo __("Pickup Time :") ?>  </label>'
+    var storepickup_time_box = '<div id="shipping_time_div" class="storepickup-box field required">'
+        + '<label for="shipping_time"><?php echo __("Pickup Time :") ?>  </label>'
         + '<select style="display:none;" id="shipping_time" name="shipping_time" class="validate-select"></select>'
         + '</div>';
     var defaultStore= '<?php echo $block->getSystemConfig()->getDefaultStore() ?>';
-    var isDisplayPickuptime= '<?php echo $block->getSystemConfig()->isDisplayPickuptime() ?>';
+    var isDisplayPickuptime= <?php echo $block->getSystemConfig()->isDisplayPickuptime() ?>;
     var storePikcuplatitude="";
     var storePikcuplongitude="";
 

@@ -17,6 +17,7 @@ class DefaultStore implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         $storeCollection = $this->_collectionFactory->create();
+        $storeCollection = $storeCollection->addFieldToFilter('status','1');
         $arr = array();
         if($storeCollection->count()=='1') {
             foreach ($storeCollection as $item) {

@@ -73,18 +73,16 @@ class ChangeDate extends \Magento\Framework\App\Action\Action
         $shippingDate = date('Y-m-d',strtotime($shippingDateString));
         $dayofweek= strtolower (date('l', strtotime($shippingDate)));
         // save pickup date to data
-        $storepickup_session = $this->_checkoutSession->getData('storepickup_session');
-        $storepickup_session['shipping_date'] = $shippingDate;
-        $this->_checkoutSession->setData('storepickup_session',$storepickup_session);
         $collectionstore = $this->_storeCollection->create();
         $store = $collectionstore->load($storeId,'storepickup_id');
         $hasBreakTime= $store->hasBreakTime($dayofweek);
         // check special days
         $specialsData = $store->getSpecialdaysData();
-        $isSpecialday = false;
+        $specialday = false;
         foreach($specialsData as $specialID){
                 $isSpecialday = array_search($shippingDate, $specialID['date'],false);
             if($isSpecialday) {
+                $specialday = true;
                 $date['time_open']= $specialID['time_open'];
                 $date['time_close']= $specialID['time_close'];
             }
@@ -92,7 +90,7 @@ class ChangeDate extends \Magento\Framework\App\Action\Action
         // if shipping date is today
         if($shippingDate==$today)
         {
-             if($isSpecialday) //today is a special day
+             if($specialday) //today is a special day
             {
                 $date['html']= $this->_storepickupHelper->generateTimes( $date['time_open'],  $date['time_close'], $thisTime);
                 return $this->getResponse()->setBody(\Zend_Json::encode($date));
@@ -120,7 +118,7 @@ class ChangeDate extends \Magento\Framework\App\Action\Action
             }
         }
         // shipping date is a specialday
-        if($isSpecialday)
+        if($specialday)
         {
             $date['html']= $this->_storepickupHelper->generateTimes( $date['time_open'],  $date['time_close']);
             return $this->getResponse()->setBody(\Zend_Json::encode( $date));

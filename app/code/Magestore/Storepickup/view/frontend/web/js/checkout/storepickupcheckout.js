@@ -13,7 +13,7 @@ define(
         function getSelectListStoreHtml() {
             var $wrapperelectHtml = $('<div class="list-store-to-pickup"><label>' + $t('Select Store:') + '</label></div>');
             var $selectStoreHtml = $('<select class="list-store-select disable-ul"></select>');
-            $selectStoreHtml.append('<option class="show-tag-li store-item" value="0">' + $t('Select a store to pickup') + '</option>');
+            $selectStoreHtml.append('<option class="show-tag-li store-item" value="">' + $t('Select a store to pickup') + '</option>');
             $.each(liststoreJson, function (index, el) {
                 $selectStoreHtml.append('<option class="show-tag-li store-item" value="' + el.storepickup_id + '">' + el.store_name + '</option>');
             });
@@ -22,22 +22,24 @@ define(
             return $wrapperelectHtml;
         }
         quote.paymentMethod.subscribe(function () {
-            if (quote.shippingMethod().carrier_code == 'storepickup' && isDisplayPickuptime) {
+            if (quote.shippingMethod().carrier_code == 'storepickup') {
                 var mapImage= '<br/><img src="http://maps.google.com/maps/api/staticmap?center=' + storePikcuplatitude + ',' + storePikcuplongitude + '&zoom=15&size=200x200&markers=color:red|label:S|' + storePikcuplatitude + ',' + storePikcuplongitude + '&sensor=false" />';
                 $('.payment-method-billing-address').html("Pickup at Store: <br/>"+$('.info-store-checkout').html());
                 $('.ship-to .shipping-information-content').html($('.info-store-checkout').html());
-                storePickupreview= '<div class="storePickupreview">'+'Pickup Date:'+$('#shipping_date').val()+"<br/>"+ 'Pickup Time:'+$('#shipping_time').val()+'</div>';
+                if(isDisplayPickuptime){
+                    storePickupreview= '<div class="storePickupreview">'+'Pickup Date:'+$('#shipping_date').val()+"<br/>"+ 'Pickup Time:'+$('#shipping_time').val()+'</div>';
+                    $('.ship-via .shipping-information-content').append(storePickupreview);
+                }
                 if(!($('.storePickupreview').length>0)) {
-                    $('.ship-via .shipping-information-content').append(storePickupreview+mapImage);
+                    $('.ship-via .shipping-information-content').append(mapImage);
                 }
             }
         }, this);
-
         quote.shippingMethod.subscribe(function (value) {
             var storePickupInformation = "<div class ='storepickup-information'></div>";
             if((!$('.storepickup-information').length > 0)) $('#checkout-shipping-method-load').append(storePickupInformation);
             if (quote.shippingMethod().carrier_code == 'storepickup') {
-                if(!($('.info-store-checkout').length>0) || isDisplayPickuptime || ($('#shipping_date').val() != '') || ($('#shipping_time').val() != '-1')) {
+                if(!($('.info-store-checkout').length>0) || ((isDisplayPickuptime) && (($('#shipping_date').val() == '') || ($('#shipping_time').val() == '-1')))) {
                     $('#shipping-method-buttons-container').hide();
                 }
                 if (!($('.list-store-to-pickup').length > 0)) {
@@ -46,8 +48,8 @@ define(
                     $('#select_store_by_map').click(function () {
                         $('#popup-mpdal').modal('openModal');
                     });
+                    //change Store function
                     $('.list-store-select').change(function () {
-
                         $('#shipping-method-buttons-container').hide();
                         if ($('#shipping_date_div').length > 0) {
                             $('#shipping_date_div').show();
@@ -80,22 +82,30 @@ define(
                                         type: "post",
                                         dateType: "text",
                                         data: {
-                                            store_id: $('.list-store-select').val(),
-                                            store_name: el.store_name,
-                                            store_address: el.address,
-                                            latitude: el.latitude,
-                                            longitude: el.longitude
+                                            store_id: $('.list-store-select').val()
                                         },
                                         success: function (result) {
-                                            storePikcupsession = $('.list-store-select').val();
-                                            if(isDisplayPickuptime) showInputDateBox(); else $('#shipping-method-buttons-container').show();
+                                            if(isDisplayPickuptime) showDateBox(); else {
+                                                $('.overlay-bg-checkout').hide();
+                                                $('#shipping-method-buttons-container').show();
+                                            }
                                         }
                                     });
                             }
                         });
+                        if($('.list-store-select').val()==""){
+                            $('.overlay-bg-checkout').hide();
+                            $('.info-store-checkout').hide();
+                            if ($('#shipping_date_div').length > 0) $('#shipping_date_div').hide();
+                            if ($('#shipping_time_div').length > 0) $('#shipping_time_div').hide();
+                        }
                     });
-                    $('.list-store-select').val(defaultStore).trigger('change');
                 }
+                $.each(liststoreJson, function (index, el) {
+                    if (el.storepickup_id == defaultStore && !($('.info-store-checkout').length>0 )) {
+                        $('.list-store-select').val(defaultStore).trigger('change');
+                    }
+                });
                 $('.storepickup-information').show();
             } else {
                 $('#shipping-method-buttons-container').show();
@@ -105,7 +115,7 @@ define(
 
 
 
-        function showInputDateBox(){
+        function showDateBox(){
 
             $.ajax( {
                 url: url.build("storepickup/checkout/disabledate"),
@@ -134,7 +144,7 @@ define(
         function showTimeBox(shipping_date_val,store_id_val) {
             if (!($('#shipping_time_div').length > 0)) {
                 $('.storepickup-information').append(storepickup_time_box);
-
+                //change Time function
                 $("#shipping_time").change(function() {
                     if(($("#shipping_time").val()!='-1')&&($('#shipping_date_div').length > 0)) {
                         $('.overlay-bg-checkout').show();
@@ -143,6 +153,8 @@ define(
                             type: "post",
                             dateType: "json",
                             data: {
+                                store_id: $('.list-store-select').val(),
+                                shipping_date: $("#shipping_date").val(),
                                 shipping_time: $("#shipping_time").val()
                             },
                             success: function (result) {

@@ -145,9 +145,9 @@ class SystemConfig
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get format time
+     * Config path to get time interval
      */
-    const XML_PATH_CARRIERS_DISPLAY_FORMAT_TIME = 'carriers/storepickup/format_time';
+    const XML_PATH_CARRIERS_TIME_INTERVAL = 'carriers/storepickup/time_interval';
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -157,7 +157,7 @@ class SystemConfig
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     * Config path to get format time
+     * Config path to get sort order
      */
     const XML_PATH_CARRIERS_SORT_ORDER = 'carriers/storepickup/sort_order';
 
@@ -499,6 +499,14 @@ class SystemConfig
     {
         return $this->_scopeConfig->getValue(
             self::XML_PATH_CARRIERS_DISPLAY_PICKUPTIME,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+    public function getTimeIntercval($store = null)
+    {
+        return $this->_scopeConfig->getValue(
+            self::XML_PATH_CARRIERS_TIME_INTERVAL,
             ScopeInterface::SCOPE_STORE,
             $store
         );

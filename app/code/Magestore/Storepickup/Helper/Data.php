@@ -68,15 +68,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_storeCollectionFactory;
 
     /**
+     * @var \Magento\Framework\Filesystem
+     */
+    protected $_filesystem;
+    /**
      * Block constructor.
      *
      * @param \Magento\Framework\App\Helper\Context $context
      */
+
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magestore\Storepickup\Model\Factory $factory,
         \Magento\Backend\Block\Widget\Grid\Column\Renderer\Options\Converter $converter,
         \Magento\Backend\Helper\Js $backendHelperJs,
+        \Magento\Framework\Filesystem $filesystem,
         \Magento\Backend\Model\Session $backendSession,
         \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory,
         \Magestore\Storepickup\Model\StoreFactory $storeFactory
@@ -84,10 +90,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         parent::__construct($context);
         $this->_factory = $factory;
         $this->_converter = $converter;
-        $this->_storeFactory = $storeFactory;
         $this->_backendHelperJs = $backendHelperJs;
-        $this->_storeCollectionFactory = $storeCollectionFactory;
+        $this->_filesystem = $filesystem;
         $this->_backendSession = $backendSession;
+        $this->_storeCollectionFactory = $storeCollectionFactory;
+        $this->_storeFactory = $storeFactory;
     }
 
     /**
@@ -165,7 +172,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         /** @var \Magestore\Storepickup\Model\ResourceModel\Store\Collection $collection */
         $collection = $this->_storeCollectionFactory->create();
-        $collection->addFieldToSelect(['storepickup_id', 'store_name','address','phone','latitude','longitude']);
+        $collection->addFieldToFilter('status','1')->addFieldToSelect(['storepickup_id', 'store_name','address','phone','latitude','longitude']);
 
         return $collection->getData();
     }
@@ -173,7 +180,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         /** @var \Magestore\Storepickup\Model\ResourceModel\Store\Collection $collection */
         $collection = $this->_storeCollectionFactory->create();
-        $collection->addFieldToSelect(['storepickup_id', 'store_name','address','phone','latitude','longitude','city','state','zipcode','country_id','fax']);
+        $collection->addFieldToFilter('status','1')->addFieldToSelect(['storepickup_id', 'store_name','address','phone','latitude','longitude','city','state','zipcode','country_id','fax']);
 
         return \Zend_Json::encode($collection->getData());
     }
@@ -181,10 +188,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->getURL('storepickup/checkout/changedate');
     }
-    public function generateTimes($mintime, $maxtime, $sys_min_time = '0:0', $interval_time = 30)
+    public function generateTimes($mintime, $maxtime, $sys_min_time = '0:0')
     {
 
         //$sys_min_time = strtotime(date('H:i:s',$sys_min_time));
+        $interval_time = $this->scopeConfig->getValue('carriers/storepickup/time_interval', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         $timeHI = explode(':', $mintime);
         $mintime= mktime($timeHI[0], $timeHI[1], 0, '01', '01', '2000');
         $timeHI = explode(':', $maxtime);
@@ -206,6 +214,33 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $listTime;
+    }
+    public function getResponseBody($url) {
+        if (ini_get('allow_url_fopen') != 1) {
+            @ini_set('allow_url_fopen', '1');
+        }
+
+        if (ini_get('allow_url_fopen') != 1) {
+            $ch = curl_init();
+            if (preg_match('/^https:/i', $url)) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+            }
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+            $contents = curl_exec($ch);
+            curl_close($ch);
+        } else {
+            $contents = file_get_contents($url);
+        }
+
+        return $contents;
+    }
+    public function getBaseDirMedia()
+    {
+        return $this->_filesystem->getDirectoryRead('media');
     }
 
 }

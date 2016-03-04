@@ -52,6 +52,8 @@ class ChangeTime extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         $storepickup_session = $this->_backendSession->getData('storepickup');
+        $storepickup_session['store_id'] = $this->getRequest()->getParam('store_id');
+        $storepickup_session['shipping_date'] = $this->getRequest()->getParam('shipping_date');
         $storepickup_session['shipping_time'] = $this->getRequest()->getParam('shipping_time');
         $this->_backendSession->setData('storepickup',$storepickup_session);
         return $this->getResponse()->setBody(\Zend_Json::encode($storepickup_session));

@@ -79,4 +79,7 @@
     <type name="Magento\Config\Model\Config\Structure\Element\Field">
         <plugin name="custom_field" type="Magestore\Storepickup\Plugin\Config\Structure\Element\Field"/>
     </type>
+    <preference for="Magento\Sales\Model\Order\Pdf\Invoice" type="Magestore\Storepickup\Model\Order\Pdf\Invoice" />
+    <preference for="Magento\Sales\Model\Order\Pdf\Shipment" type="Magestore\Storepickup\Model\Order\Pdf\Shipment" />
+    <preference for="Magento\Sales\Model\Order\Pdf\Creditmemo" type="Magestore\Storepickup\Model\Order\Pdf\Creditmemo" />
 </config>
