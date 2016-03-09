@@ -114,7 +114,7 @@ class Gallery extends \Magento\Framework\Data\Form\Element\AbstractElement
         $store = $this->_coreRegistry->registry('storepickup_store');
 
         $imageCollection = $this->_imageCollectionFactory->create()
-            ->addFieldToFilter('storepickup_id', $store->getId());
+            ->addFieldToFilter('pickup_id', $store->getId());
 
         $imageArray = [];
         foreach ($imageCollection as $image) {

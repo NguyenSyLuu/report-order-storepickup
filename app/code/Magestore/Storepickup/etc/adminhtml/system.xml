@@ -168,14 +168,26 @@
                     </depends>
                     <source_model>Magestore\Storepickup\Model\Config\Source\TimeInterval</source_model>
                 </field>
-                <!--<field id="storeowner_email_template" translate="label" type="select" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                <!--<field id="storeowner_email_template" translate="label" type="select" sortOrder="96" showInDefault="1" showInWebsite="1" showInStore="1">-->
                     <!--<label>Email to store owner when pickup order is created</label>-->
-                    <!--<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>-->
+                    <!--<source_model>Magestore\Storepickup\Model\Config\Source\EmailTemplate</source_model>-->
                 <!--</field>-->
-                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                <!--<field id="shopadmin_email_template" translate="label" type="select" sortOrder="97" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                    <!--<label>To admin when pickup order is created</label>-->
+                    <!--<source_model>Magestore\Storepickup\Model\Config\Source\EmailTemplate</source_model>-->
+                <!--</field>-->
+                <!--<field id="storeowner_email_customer" translate="label" type="select" sortOrder="98" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                    <!--<label>To store-owner and web-shop admin when customers contact</label>-->
+                    <!--<source_model>Magestore\Storepickup\Model\Config\Source\EmailTemplate</source_model>-->
+                <!--</field>-->
+                <!--<field id="storeowner_email_change_status" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                    <!--<label>To store owner when pickup order status is changed</label>-->
+                    <!--<source_model>Magestore\Storepickup\Model\Config\Source\EmailTemplate</source_model>-->
+                <!--</field>-->
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Displayed Error Message</label>
                 </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="sort_order" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
                 </field>
             </group>

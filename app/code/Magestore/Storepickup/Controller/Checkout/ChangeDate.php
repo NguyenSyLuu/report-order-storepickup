@@ -45,6 +45,16 @@ class ChangeDate extends \Magento\Framework\App\Action\Action
      */
     protected $_storepickupHelper;
 
+    /**
+     * ChangeDate constructor.
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
+     * @param \Magestore\Storepickup\Model\StoreFactory $storeCollection
+     * @param \Magento\Framework\Stdlib\DateTime\TimezoneInterface $gmtdate
+     * @param \Magestore\Storepickup\Helper\Data $storepickupHelper
+     * @param \Magento\Checkout\Model\Session $checkoutSession
+     */
+
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
@@ -81,7 +91,7 @@ class ChangeDate extends \Magento\Framework\App\Action\Action
         $specialday = false;
         foreach($specialsData as $specialID){
                 $isSpecialday = array_search($shippingDate, $specialID['date'],false);
-            if($isSpecialday) {
+            if($isSpecialday !== false) {
                 $specialday = true;
                 $date['time_open']= $specialID['time_open'];
                 $date['time_close']= $specialID['time_close'];

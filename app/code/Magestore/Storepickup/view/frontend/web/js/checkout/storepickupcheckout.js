@@ -26,12 +26,12 @@ define(
                 var mapImage= '<br/><img src="http://maps.google.com/maps/api/staticmap?center=' + storePikcuplatitude + ',' + storePikcuplongitude + '&zoom=15&size=200x200&markers=color:red|label:S|' + storePikcuplatitude + ',' + storePikcuplongitude + '&sensor=false" />';
                 $('.payment-method-billing-address').html("Pickup at Store: <br/>"+$('.info-store-checkout').html());
                 $('.ship-to .shipping-information-content').html($('.info-store-checkout').html());
-                if(isDisplayPickuptime){
-                    storePickupreview= '<div class="storePickupreview">'+'Pickup Date:'+$('#shipping_date').val()+"<br/>"+ 'Pickup Time:'+$('#shipping_time').val()+'</div>';
-                    $('.ship-via .shipping-information-content').append(storePickupreview);
-                }
                 if(!($('.storePickupreview').length>0)) {
                     $('.ship-via .shipping-information-content').append(mapImage);
+                }
+                if(isDisplayPickuptime && !($('.storePickupreview').length>0)){
+                    storePickupreview= '<div class="storePickupreview">'+'Pickup Date:'+$('#shipping_date').val()+"<br/>"+ 'Pickup Time:'+$('#shipping_time').val()+'</div>';
+                    $('.ship-via .shipping-information-content').append(storePickupreview);
                 }
             }
         }, this);
@@ -39,7 +39,7 @@ define(
             var storePickupInformation = "<div class ='storepickup-information'></div>";
             if((!$('.storepickup-information').length > 0)) $('#checkout-shipping-method-load').append(storePickupInformation);
             if (quote.shippingMethod().carrier_code == 'storepickup') {
-                if(!($('.info-store-checkout').length>0) || ((isDisplayPickuptime) && (($('#shipping_date').val() == '') || ($('#shipping_time').val() == '-1')))) {
+                if(!($('.info-store-checkout').length>0) || $('.list-store-select').val()=="" || ((isDisplayPickuptime) && (($('#shipping_date').val() == '') || ($('#shipping_time').val() == '-1')))) {
                     $('#shipping-method-buttons-container').hide();
                 }
                 if (!($('.list-store-to-pickup').length > 0)) {
@@ -72,6 +72,7 @@ define(
                                 var store_information = '<h3>' + el.store_name + '</h3><br/>' + '<p>' + $t('Store address: ') + el.address + '</p>'+'<p>' + $t('Store Phone: ') + el.phone + '</p>';
                                 if ($('.info-store-checkout').length > 0) {
                                     $('.info-store-checkout').html(store_information);
+                                    $('.info-store-checkout').show();
                                 } else {
                                     var info_store = '<div class ="info-store-checkout">' + '<h3>'+ el.store_name + '</h3><br/>' + '<p>' + $t('Store address: ') + el.address + '</p>'+'<p>' + $t('Store Phone: ') + el.phone + '</p>' + '</div>';
                                     $('#select_store_by_map').after(info_store);

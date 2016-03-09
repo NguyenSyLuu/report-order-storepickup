@@ -17,7 +17,6 @@ class EmailTemplate extends \Magento\Config\Model\Config\Source\Email\Template
             'label' => 'None'
         );
         $option = parent::toOptionArray();
-        var_dump($option);die('ád');
         foreach ($option as $value) {
             $options[] = $value;
         }

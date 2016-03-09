@@ -374,7 +374,7 @@ class Store extends \Magento\Framework\Model\AbstractModel
                 $path = \Magestore\Storepickup\Model\Image::IMAGE_GALLERY_PATH . $imageData['file'];
                 $imageItem = [
                     'path'                  => $path,
-                    $this->getIdFieldName() => $this->getId(),
+                    'pickup_id' => $this->getId(),
                 ];
 
                 if (isset($imageData['base'])) {
@@ -718,7 +718,7 @@ class Store extends \Magento\Framework\Model\AbstractModel
     {
         /** @var  \Magestore\Storepickup\Model\ResourceModel\Image\Collection $collection */
         $collection = $this->_imageCollectionFactory->create();
-        $collection->addFieldToFilter('storepickup_id', $this->getId());
+        $collection->addFieldToFilter('pickup_id', $this->getId());
 
         return $collection;
     }

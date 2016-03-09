@@ -48,6 +48,8 @@ class InstallSchema implements InstallSchemaInterface
     const SCHEMA_STORE_TAG = 'magestore_storepickup_store_tag';
     const SCHEMA_STORE_HOLIDAY = 'magestore_storepickup_store_holiday';
     const SCHEMA_STORE_SPECIALDAY = 'magestore_storepickup_store_specialday';
+    const SCHEMA_ORDER = 'magestore_storepickup_order';
+    const SCHEMA_OWNER = 'magestore_storepickup_owner';
 
     /**
      * {@inheritdoc}
@@ -66,6 +68,7 @@ class InstallSchema implements InstallSchemaInterface
         $installer->getConnection()->dropTable($installer->getTable(self::SCHEMA_SCHEDULE));
         $installer->getConnection()->dropTable($installer->getTable(self::SCHEMA_HOLIDAY));
         $installer->getConnection()->dropTable($installer->getTable(self::SCHEMA_SPECIALDAY));
+        $installer->getConnection()->dropTable($installer->getTable(self::SCHEMA_ORDER));
 
         /*
          * Create table magestore_storepickup_schedule
@@ -948,7 +951,7 @@ class InstallSchema implements InstallSchemaInterface
             ['nullable' => false],
             'Relative Path Image'
         )->addColumn(
-            'storepickup_id',
+            'pickup_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
             ['unsigned' => true, 'nullable' => false],
@@ -964,19 +967,19 @@ class InstallSchema implements InstallSchemaInterface
         )->addIndex(
             $installer->getIdxName(
                 $installer->getTable(self::SCHEMA_IMAGE),
-                ['storepickup_id'],
+                ['pickup_id'],
                 AdapterInterface::INDEX_TYPE_INDEX
             ),
-            ['storepickup_id'],
+            ['pickup_id'],
             ['type' => AdapterInterface::INDEX_TYPE_INDEX]
         )->addForeignKey(
             $installer->getFkName(
                 self::SCHEMA_IMAGE,
-                'storepickup_id',
+                'pickup_id',
                 self::SCHEMA_STORE,
                 'storepickup_id'
             ),
-            'storepickup_id',
+            'pickup_id',
             $installer->getTable(self::SCHEMA_STORE),
             'storepickup_id',
             \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE

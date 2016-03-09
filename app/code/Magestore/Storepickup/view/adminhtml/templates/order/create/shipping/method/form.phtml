@@ -191,9 +191,8 @@
                         storePikcuplatitude= el.latitude;
                         storePikcuplongitude=el.longitude;
                         var store_information = '<p>' + $t('Store address: ') + el.address + '</p>'+'<p>' + $t('Store Phone: ') + el.phone + '</p>'+'<img src="http://maps.google.com/maps/api/staticmap?center=' + storePikcuplatitude + ',' + storePikcuplongitude + '&zoom=15&size=200x200&markers=color:red|label:S|' + storePikcuplatitude + ',' + storePikcuplongitude + '&sensor=false" />';
-
                         $('.info-store-checkout').html(store_information);
-
+                        $('.info-store-checkout').show();
                         $.ajax(
                             {
                                 url: url.build('../../../../../storepickupadmin/checkout/changestore'),
@@ -307,7 +306,11 @@
                         }
                     });
             }
-            $('.list-store-select').val(defaultStore).trigger('change');
+            $.each(liststoreJson, function (index, el) {
+                if (el.storepickup_id == defaultStore && !($('.info-store-checkout').length>0 )) {
+                    $('.list-store-select').val(defaultStore).trigger('change');
+                }
+            });
         }
     );
     window.liststoreJson = <?php echo $this->helper('Magestore\Storepickup\Helper\Data')->getListStoreJson() ?>;

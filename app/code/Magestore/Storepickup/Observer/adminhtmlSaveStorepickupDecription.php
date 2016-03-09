@@ -49,15 +49,35 @@ class adminhtmlSaveStorepickupDecription implements ObserverInterface
      * @var \Magento\Sales\Api\Data\OrderAddressInterface
      */
     protected $_orderAddressInterface;
+    /**
+     * @var \Magestore\Storepickup\Helper\Data
+     */
+    protected $_storepickupHelper;
+    /**
+     * @var \Magestore\Storepickup\Helper\Email
+     */
+    protected $_storepickupHelperEmail;
 
+    /**
+     * adminhtmlSaveStorepickupDecription constructor.
+     * @param \Magento\Backend\Model\Session $backendSession
+     * @param \Magestore\Storepickup\Model\StoreFactory $storeCollection
+     * @param \Magento\Sales\Api\Data\OrderAddressInterface $orderAddressInterface
+     * @param \Magestore\Storepickup\Helper\Data $storepickupHelper
+     * @param \Magestore\Storepickup\Helper\Email $storepickupHelperEmail
+     */
     public function __construct(
         \Magento\Backend\Model\Session $backendSession,
         \Magestore\Storepickup\Model\StoreFactory $storeCollection,
-        \Magento\Sales\Api\Data\OrderAddressInterface $orderAddressInterface
+        \Magento\Sales\Api\Data\OrderAddressInterface $orderAddressInterface,
+        \Magestore\Storepickup\Helper\Data $storepickupHelper,
+        \Magestore\Storepickup\Helper\Email $storepickupHelperEmail
     ){
         $this->_backendSession = $backendSession;
         $this->_storeCollection = $storeCollection;
         $this->_orderAddressInterface = $orderAddressInterface;
+        $this->_storepickupHelper = $storepickupHelper;
+        $this->_storepickupHelperEmail = $storepickupHelperEmail;
     }
 
     /**
@@ -108,6 +128,9 @@ class adminhtmlSaveStorepickupDecription implements ObserverInterface
                     $datashipping['save_in_address_book'] = 1;
 
                     $order->getShippingAddress()->addData($datashipping);
+                    //$order->sendNewOrderEmail();
+                    //$this->_storepickupHelperEmail->sendNoticeEmailToStoreOwner($order,$store);
+                    //$this->_storepickupHelperEmail->sendNoticeEmailToAdmin($order,$store);
                 }
             }
 
