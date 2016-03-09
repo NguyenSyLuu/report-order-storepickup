@@ -105,7 +105,17 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
         $relativePath,
         $makeResize = false
     ) {
-        if (!empty($_FILES[$fileId]['name'])) {
+        $imageRequest = $this->_getRequest()->getFiles($fileId);
+        if ($imageRequest) {
+            if (isset($imageRequest['name'])) {
+                $fileName = $imageRequest['name'];
+            } else {
+                $fileName = '';
+            }
+        } else {
+            $fileName = '';
+        }
+        if ($imageRequest && strlen($fileName)) {
             try {
                 /** @var \Magento\MediaStorage\Model\File\Uploader $uploader */
                 $uploader = $this->_imageUploaderFactory->create(['fileId' => $fileId]);
