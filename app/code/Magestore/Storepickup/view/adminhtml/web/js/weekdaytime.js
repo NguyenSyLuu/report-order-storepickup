@@ -52,7 +52,7 @@ define([
      * set current minute
      */
     WeekdayTime.prototype.setCurrentMinute = function(minute) {
-        if(MAGE_UTIL.arrayHours.indexOf(minute) !== -1) {
+        if(MAGE_UTIL.arrayMinutes.indexOf(minute) !== -1) {
             $(this.minuteElemnt).val(minute);
         }
     }

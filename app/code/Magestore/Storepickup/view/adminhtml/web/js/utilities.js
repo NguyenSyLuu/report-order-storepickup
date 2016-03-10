@@ -19,6 +19,7 @@
  */
 define([], function($){
     var MAGE_UTIL = {};
+    window.MAGE_UTIL = MAGE_UTIL;
 
     MAGE_UTIL.str_pad = function (input, pad_length, pad_string, pad_type) {
         var half = '',
@@ -64,7 +65,7 @@ define([], function($){
         MAGE_UTIL.arrayHours.push(MAGE_UTIL.str_pad(h,2,0,'STR_PAD_LEFT'));
     }
 
-    for(var m = 0; m < 59; ++m) {
+    for(var m = 0; m < 60; ++m) {
         MAGE_UTIL.arrayMinutes.push(MAGE_UTIL.str_pad(m,2,0,'STR_PAD_LEFT'));
     }
 
