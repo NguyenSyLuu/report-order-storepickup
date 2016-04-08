@@ -36,7 +36,7 @@ class Wrapper extends \Magestore\Storepickup\Block\AbstractBlock
      *
      */
 
-    protected $_storeCollectionFactory;
+    //protected $_storeCollectionFactory;
 
     /**
      * Block constructor.
@@ -46,11 +46,11 @@ class Wrapper extends \Magestore\Storepickup\Block\AbstractBlock
      */
     public function __construct(
         \Magestore\Storepickup\Block\Context $context,
-        \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory,
+        //\Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->_storeCollectionFactory = $storeCollectionFactory;
+        //$this->_storeCollectionFactory = $storeCollectionFactory;
     }
 
     public function _prepareLayout()

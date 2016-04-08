@@ -69,7 +69,7 @@ class saveStorepickupDecription implements ObserverInterface
         try {
             /** @var \Magento\Sales\Model\Order $order */
             $order = $observer->getEvent()->getOrder();
-            if($order->getShippingMethod(true)->getCarrierCode()=="storepickup") {
+            if($order->getShippingMethod()->getCarrierCode()=="storepickup") {
                 if ($this->_checkoutSession->getData('storepickup_session')) {
                     $new = $order->getShippingDescription();
                     $storepickup_session = $this->_checkoutSession->getData('storepickup_session',true);

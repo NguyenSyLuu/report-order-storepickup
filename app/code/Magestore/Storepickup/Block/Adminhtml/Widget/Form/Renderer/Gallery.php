@@ -37,7 +37,7 @@ class Gallery extends \Magento\Backend\Block\Template implements RendererInterfa
     /**
      * @var \Magento\Framework\View\Asset\Repository
      */
-    protected $_assetRepo;
+    //protected $_assetRepo;
     /**
      * @var \Magento\Framework\Data\Form\Element\AbstractElement
      */
@@ -49,11 +49,11 @@ class Gallery extends \Magento\Backend\Block\Template implements RendererInterfa
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \Magento\Framework\View\Asset\Repository $assetRepo,
+        //\Magento\Framework\View\Asset\Repository $assetRepo,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->_assetRepo = $assetRepo;
+        //$this->_assetRepo = $assetRepo;
     }
 
     /**
