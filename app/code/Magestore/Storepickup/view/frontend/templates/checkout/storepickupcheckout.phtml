@@ -15,35 +15,37 @@
     var isDisplayPickuptime= <?php echo $block->getSystemConfig()->isDisplayPickuptime() ?>;
     var storePikcuplatitude="";
     var storePikcuplongitude="";
+    window.onload = function() {
+        require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal',
+                'Magestore_Storepickup/js/checkout/storepickupcheckout'
+            ],
+            function(
+                $,
+                modal
+            ) {
 
-    require(
-        [
-            'jquery',
-            'Magento_Ui/js/modal/modal',
-            'Magestore_Storepickup/js/checkout/storepickupcheckout'
-        ],
-        function(
-            $,
-            modal
-        ) {
+                var options = {
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    title: 'Choose store by map',
+                    buttons: [{
+                        text: $.mage.__('Close'),
+                        class: '',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }]
+                };
 
-            var options = {
-                type: 'popup',
-                responsive: true,
-                innerScroll: true,
-                title: 'Choose store by map',
-                buttons: [{
-                    text: $.mage.__('Close'),
-                    class: '',
-                    click: function () {
-                        this.closeModal();
-                    }
-                }]
-            };
+                var popup = modal(options, $('#popup-mpdal'));
+            }
+        );
+    };
 
-            var popup = modal(options, $('#popup-mpdal'));
-        }
-    );
     window.liststoreJson = <?php echo $block->getListStore() ?>;
 
 </script>

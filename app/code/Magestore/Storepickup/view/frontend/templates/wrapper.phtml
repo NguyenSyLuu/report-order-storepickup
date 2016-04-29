@@ -34,10 +34,12 @@
         <img src="<?php echo $block->getViewFileUrl('Magestore_Storepickup::images/ajax-loader.gif') ?>" alt="overlay" />
     </div>
     <script type="text/javascript">
+        var loadStoreURL = '<?php echo $block->getUrl('storepickup/index/loadstore') ?>';
+        if(window.location.href.slice(0,5)=='https') loadStoreURL= loadStoreURL.replace("http:","https:");
         require(['jquery', 'magestore/googlemap'], function($){
             $(document).ready(function ($) {
                 $('.googlemap').GoogleMap({
-                    urlLoadStore: '<?php echo $block->getUrl('storepickup/index/loadstore') ?>',
+                    urlLoadStore: loadStoreURL,
                     paginationWrapper: '.pagination-wrapper',
                     liststoreContainer: '.list-store-container',
                     storePopupTemplate: '.popup-store-template',
