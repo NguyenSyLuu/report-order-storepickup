@@ -970,16 +970,16 @@ class InstallSchema implements InstallSchemaInterface
                 ['pickup_id'],
                 AdapterInterface::INDEX_TYPE_INDEX
             ),
-            ['pickup_id'],
+            ['storepickup_id'],
             ['type' => AdapterInterface::INDEX_TYPE_INDEX]
         )->addForeignKey(
             $installer->getFkName(
                 self::SCHEMA_IMAGE,
-                'pickup_id',
+                'storepickup_id',
                 self::SCHEMA_STORE,
                 'storepickup_id'
             ),
-            'pickup_id',
+            'storepickup_id',
             $installer->getTable(self::SCHEMA_STORE),
             'storepickup_id',
             \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
