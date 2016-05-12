@@ -22,7 +22,7 @@
 
 /** @var \Magestore\Storepickup\Block\Wrapper $block */
 ?>
-<script src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" ></script>
+
 <div class="storepickup-wrapper col-full">
     <h2 class="title-page"><?php echo __('Store pickup') ?></h2>
     <?php echo $block->getChildHtml('storepickup.searchbox'); ?>
@@ -36,7 +36,7 @@
     <script type="text/javascript">
         var loadStoreURL = '<?php echo $block->getUrl('storepickup/index/loadstore') ?>';
         if(window.location.href.slice(0,5)=='https') loadStoreURL= loadStoreURL.replace("http:","https:");
-        require(['jquery', 'magestore/googlemap'], function($){
+        require(['jquery', 'magestore/googlemap', 'Magestore_Storepickup/js/makercluster'], function($){
             $(document).ready(function ($) {
                 $('.googlemap').GoogleMap({
                     urlLoadStore: loadStoreURL,
