@@ -967,7 +967,7 @@ class InstallSchema implements InstallSchemaInterface
         )->addIndex(
             $installer->getIdxName(
                 $installer->getTable(self::SCHEMA_IMAGE),
-                ['pickup_id'],
+                ['storepickup_id'],
                 AdapterInterface::INDEX_TYPE_INDEX
             ),
             ['storepickup_id'],

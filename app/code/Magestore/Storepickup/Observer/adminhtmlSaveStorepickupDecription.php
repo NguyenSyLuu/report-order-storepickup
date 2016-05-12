@@ -33,7 +33,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
  * @module   StorePickup
  * @author   Magestore Developer
  */
-class adminhtmlSaveStorepickupDecription implements ObserverInterface
+class AdminhtmlSaveStorepickupDecription implements ObserverInterface
 {
     /**
      * @param \Magento\Checkout\Model\Session $checkoutSession
