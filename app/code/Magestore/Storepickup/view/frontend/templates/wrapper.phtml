@@ -33,7 +33,7 @@
     <div class="overlay-bg">
         <img src="<?php echo $block->getViewFileUrl('Magestore_Storepickup::images/ajax-loader.gif') ?>" alt="overlay" />
     </div>
-    <script type="text/javascript" >
+    <script type="text/javascript">
         var loadStoreURL = '<?php echo $block->getUrl('storepickup/index/loadstore') ?>';
         if(window.location.href.slice(0,5)=='https') loadStoreURL= loadStoreURL.replace("http:","https:");
         require(['jquery', 'magestore/googlemap', 'Magestore_Storepickup/js/makercluster'], function($){
