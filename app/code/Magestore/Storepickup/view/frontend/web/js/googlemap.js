@@ -89,9 +89,10 @@ define([
              * @type {*|k}
              */
             this.markerClusterer = new MarkerClusterer(this.map, [], {
+				styles: mcOptions,
                 gridSize: 10,
                 maxZoom: 15
-            });
+            } );
 
             this.storePopupTmpl = mageTemplate($(options.storePopupTemplate).html());
 
