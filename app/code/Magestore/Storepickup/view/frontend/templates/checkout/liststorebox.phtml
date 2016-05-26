@@ -109,3 +109,31 @@
         </div>
     </div>
 </script>
+<script id="store-template" class="store-template" type="text/x-magento-template">
+    <li class="show-tag-li store-item store-<%- data.storepickup_id %>"
+        title="<%- data.store_name %>"
+        data-store-id="<%- data.storepickup_id %>"
+        data-store-index="<%- data.index %>"
+        data-latitude="<%- data.latitude %>"
+        data-longitude="<%- data.longitude %>"
+        data-address="<%- data.address %>"
+    >
+        <div class="">
+            <div class="col-sm-3 col-xs-3 tag-store">
+                <img style="min-height: 50px; width: auto;" src="<%- data.imgSrc %>" alt="<%- data.store_name %>">
+                <p class="text-center"><%- data.distanceText %></p>
+            </div>
+            <div class="col-sm-9 col-xs-9 tag-content">
+                <h4><a target="_blank" class="title-store"
+                       href="<?php echo $block->getBaseUrl() ?><%- data.rewrite_request_path %>"><%- data.store_name
+                        %></a></h4>
+                <p class="address-store"><%- data.address %></p>
+                <p class="phone-store"><%- data.phone %></p>
+                <p>
+                    <span class="btn-link street-view">Street View</span>
+                    <span class="btn-link direction">Direction</span>
+                </p>
+            </div>
+        </div>
+    </li>
+</script>
