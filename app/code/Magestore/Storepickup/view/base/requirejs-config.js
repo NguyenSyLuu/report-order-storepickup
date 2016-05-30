@@ -19,10 +19,10 @@
  */
 var config = {
     map: {
-       '*': {
-           'Magestore_Storepickup/js/store/map-loader' : 'Magestore_Storepickup/js/store/map/map-loader',
-           'magestore/region-updater' : 'Magestore_Storepickup/js/store/region-updater',
-       }
+        '*': {
+            'Magestore_Storepickup/js/store/map-loader' : 'Magestore_Storepickup/js/store/map/map-loader',
+            'magestore/region-updater' : 'Magestore_Storepickup/js/store/region-updater',
+        }
     },
     paths: {
     },

@@ -19,7 +19,7 @@
  */
 define([
     'jquery',
-    'Magestore_Storepickup/js/store/map-loader',
+    'Magestore_Storepickup/js/store/map/map-loader',
     'mage/template',
     'jquery/ui',
 ], function($, Maploader, mageTemplate) {

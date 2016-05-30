@@ -19,7 +19,7 @@
  */
 define([
     'jquery',
-    'Magestore_Storepickup/js/store/map-loader',
+    'Magestore_Storepickup/js/store/map/map-loader',
     'mage/template',
     'Magestore_Storepickup/js/pagination',
     'Magestore_Storepickup/js/liststore',
