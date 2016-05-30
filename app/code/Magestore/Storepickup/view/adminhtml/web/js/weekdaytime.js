@@ -19,7 +19,7 @@
  */
 define([
     'jquery',
-    'magestore/utilities'
+    'Magestore_Storepickup/js/utilities'
 ], function($, MAGE_UTIL){
     var WeekdayTime = function(hourElement, minuteElemnt, callbackChange) {
         this.hourElement = hourElement;

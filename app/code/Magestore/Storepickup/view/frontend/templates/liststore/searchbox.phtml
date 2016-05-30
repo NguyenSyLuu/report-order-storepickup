@@ -25,7 +25,7 @@
 <div class="search-box"
      data-default-raidus
      data-mage-init='{
-        "magestore/searchbox": {
+        "Magestore_Storepickup/js/searchbox": {
             "defaultRaidus": "<?php echo $block->getSystemConfig()->getDefaultRadius() ?>",
             "distanceUnit": "<?php echo $block->getSystemConfig()->getDistanceUnit() ?>"
         }
@@ -118,7 +118,7 @@
             <div class="search-filter col-full padding-right padding-left">
                 <ul id="list-tag-ul"
                     class="list-inline list-tag-ul col-full"
-                    data-mage-init='{"magestore/tag": {"btnCheckAll": ".btn-check-all", "btnUnCheckAll": ".btn-un-check-all"}}'
+                    data-mage-init='{"Magestore_Storepickup/js/tag": {"btnCheckAll": ".btn-check-all", "btnUnCheckAll": ".btn-un-check-all"}}'
                 >
                     <?php if(count($block->getTagCollection())!=0):?>
                     <?php foreach ($block->getTagCollection() as $tag) : ?>

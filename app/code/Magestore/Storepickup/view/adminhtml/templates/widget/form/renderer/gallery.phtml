@@ -26,7 +26,7 @@
 ?>
 <div id="<?php echo $block->getHtmlId() ?>-container" class="image-gallery-container images"
      data-max-file-size="<?php echo $block->getFileMaxSize() ?>"
-     data-mage-init='{"magestore/baseimage": {"imagesJson": <?php echo $block->getImageJsonData() ?>, "maximumImageCount": <?php echo $block->getMaximumImageCount() ?>, "galleryContainer": "#<?php echo $block->getHtmlId() ?>-container"}}'
+     data-mage-init='{"Magestore_Storepickup/js/gallery/base-image-uploader": {"imagesJson": <?php echo $block->getImageJsonData() ?>, "maximumImageCount": <?php echo $block->getMaximumImageCount() ?>, "galleryContainer": "#<?php echo $block->getHtmlId() ?>-container"}}'
 >
     <div class="image image-placeholder">
         <input type="file" name="image" data-url="<?php echo $block->getUploadUrl() ?>" multiple="multiple" />

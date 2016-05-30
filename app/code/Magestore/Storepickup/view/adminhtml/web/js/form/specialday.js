@@ -19,8 +19,8 @@
  */
 define([
     'jquery',
-    'magestore/utilities',
-    'magestore/weekdaytime'
+    'Magestore_Storepickup/js/utilities',
+    'Magestore_Storepickup/js/weekdaytime'
 ], function($, MAGE_UTIL, WeekdayTime) {
     var openTime = new WeekdayTime(
             '#specialday_time_open_hour',

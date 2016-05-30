@@ -92,7 +92,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 }
             }
 
-            require(['magestore/schedule']);
+            require(['Magestore_Storepickup/js/form/schedule']);
         ";
     }
 }

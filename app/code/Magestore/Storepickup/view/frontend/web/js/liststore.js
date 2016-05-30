@@ -21,7 +21,7 @@ define([
     'jquery',
     'mage/template',
     'jquery/ui',
-    'magestore/direction'
+    'Magestore_Storepickup/js/direction'
 ], function($, mageTemplate) {
     $.widget('magestore.liststore', {
         options: {

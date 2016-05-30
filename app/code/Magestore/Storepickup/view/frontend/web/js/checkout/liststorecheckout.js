@@ -23,7 +23,7 @@ define([
     'mage/url',
     'mage/translate',
     'jquery/ui',
-    'magestore/direction'
+    'Magestore_Storepickup/js/direction'
 ], function ($, mageTemplate, url, $t) {
     $.widget('magestore.liststore', {
         options: {

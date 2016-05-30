@@ -91,7 +91,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 }
             }
 
-            require(['magestore/specialday']);
+            require(['Magestore_Storepickup/js/form/specialday']);
         ";
     }
 }

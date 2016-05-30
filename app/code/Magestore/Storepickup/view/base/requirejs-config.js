@@ -20,7 +20,7 @@
 var config = {
     map: {
        '*': {
-           'magestore/map-loader' : 'Magestore_Storepickup/js/store/map/map-loader',
+           'Magestore_Storepickup/js/store/map-loader' : 'Magestore_Storepickup/js/store/map/map-loader',
            'magestore/region-updater' : 'Magestore_Storepickup/js/store/region-updater',
        }
     },

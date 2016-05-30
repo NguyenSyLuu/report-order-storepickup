@@ -19,14 +19,14 @@
  */
 var config = {
     map: {
-       '*': {
+        '*': {
             'magestore/weekdaytime' : 'Magestore_Storepickup/js/weekdaytime',
             'magestore/utilities' : 'Magestore_Storepickup/js/utilities',
             'magestore/schedule' : 'Magestore_Storepickup/js/form/schedule',
             'magestore/specialday' : 'Magestore_Storepickup/js/form/specialday',
             'magestore/map': 'Magestore_Storepickup/js/store/map',
             'magestore/baseimage': 'Magestore_Storepickup/js/gallery/base-image-uploader',
-       }
+        }
     },
     paths: {
     },

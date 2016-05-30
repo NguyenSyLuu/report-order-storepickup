@@ -20,7 +20,7 @@
 define([
     'jquery',
     'jquery/ui',
-    'magestore/tag',
+    'Magestore_Storepickup/js/tag',
 ], function($) {
     $.widget('magestore.searchbox', {
         options: {

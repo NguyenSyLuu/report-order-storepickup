@@ -89,7 +89,7 @@ $ishasSpecialday = count($specialDayData);
             <?php endif; ?>
 
             <div class="tab_content col-full">
-                <div data-mage-init='{"magestore/direction": {"latitude": "<?php echo $store->getLatitude() ?>", "longitude": <?php echo $store->getLongitude() ?>}}' class="option-direction custom-popup col-xs-12"style="padding: 0;">
+                <div data-mage-init='{"Magestore_Storepickup/js/direction": {"latitude": "<?php echo $store->getLatitude() ?>", "longitude": <?php echo $store->getLongitude() ?>}}' class="option-direction custom-popup col-xs-12"style="padding: 0;">
                     <ul class="vertical text-center">
                         <li class="travel car active" data-traveling="DRIVING"><span>A</span></li>
                         <li class="travel bus"  data-traveling="TRANSIT"><span>A</span></li>
@@ -303,7 +303,7 @@ $ishasSpecialday = count($specialDayData);
     </div>
 </script>
 <script type="text/javascript">
-    require(['jquery', 'magestore/viewpage/map'], function ($) {
+    require(['jquery', 'Magestore_Storepickup/js/viewpage/map'], function ($) {
         $(document).ready(function ($) {
             $('.storeday-tab-bar').click(function () {
                 if (!$(this).hasClass('active')) {

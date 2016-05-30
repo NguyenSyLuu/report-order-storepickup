@@ -19,13 +19,13 @@
  */
 define([
     'jquery',
-    'magestore/map-loader',
+    'Magestore_Storepickup/js/store/map-loader',
     'mage/template',
-    'magestore/pagination',
-    'magestore/liststore',
-    'magestore/searchbox',
-    'magestore/direction',
-    'magestore/tag',
+    'Magestore_Storepickup/js/pagination',
+    'Magestore_Storepickup/js/liststore',
+    'Magestore_Storepickup/js/searchbox',
+    'Magestore_Storepickup/js/direction',
+    'Magestore_Storepickup/js/tag',
     'jquery/ui',
     'mage/translate'
 ], function($, Maploader, mageTemplate) {
