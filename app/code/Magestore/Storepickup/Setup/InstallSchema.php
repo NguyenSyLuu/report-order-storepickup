@@ -951,7 +951,7 @@ class InstallSchema implements InstallSchemaInterface
             ['nullable' => false],
             'Relative Path Image'
         )->addColumn(
-            'pickup_id',
+            'storepickup_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
             ['unsigned' => true, 'nullable' => false],
