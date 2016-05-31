@@ -81,7 +81,7 @@ class SaveStorepickupDecription implements ObserverInterface
                     if(isset($storepickup_session['shipping_date']) &&isset($storepickup_session['shipping_time'])) {
                         $new .= '<br>'.__('Pickup date').' : ' . $storepickup_session['shipping_date'].'<br>' .__('Pickup time'). ' : ' . $storepickup_session['shipping_time'].'<br><img src="http://maps.google.com/maps/api/staticmap?center='.$store->getData('latitude'). ',' . $store->getData('longitude') . '&zoom=15&size=200x200&markers=color:red|label:S|' . $store->getData('latitude') . ',' . $store->getData('longitude') . '&sensor=false" />';
                     } else {
-                        $new .= '<br><img src="http://maps.google.com/maps/api/staticmap?center='.$store->getData('latitude'). ',' . $store->getData('longitude') . '&zoom=15&size=200x200&markers=color:red|label:S|' . $store->getData('latitude') . ',' . $store->getData('longitude') . '&sensor=false" />';
+                        $new .= '<br><img src="http://maps.google.com/maps/api/staticmap?center='.$store->getData('latitude'). ',' . $store->getData('longitude') . '&zoom=15&size=200x200&markers=color:red|label:S|' . $store->getData('latitude') . ',' . $store->getData('longitude') . '&sensor=false&key=AIzaSyA4rAT0fdTZLNkJ5o0uaAwZ89vVPQpr_Kc" />';
                     }
                     $order->setShippingDescription($new);
                     //set shipping address
