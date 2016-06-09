@@ -25,6 +25,7 @@ namespace Magestore\Storepickup\Model;
 use Magento\Framework\Exception\LocalizedException;
 use Magestore\Storepickup\Model\Schedule\Option\WeekdayStatus;
 use Magento\UrlRewrite\Model\UrlPersistInterface;
+use Magento\Framework\Model\AbstractModel;
 
 /**
  * Model Store.
@@ -34,7 +35,7 @@ use Magento\UrlRewrite\Model\UrlPersistInterface;
  * @module   Storepickup
  * @author   Magestore Developer
  */
-class Store extends \Magento\Framework\Model\AbstractModel
+class Store extends AbstractModel
 {
     const MAX_COUNT_TIME_CHECK_URL_REWRITE = 100;
 
@@ -63,6 +64,10 @@ class Store extends \Magento\Framework\Model\AbstractModel
         self::METHOD_GET_SPECIALDAY_ID => 'getSpecialdayIds',
     ];
 
+	/* @var $_storeId Support Multiple Store */
+
+    protected $_storeId = null;
+	
     /**
      * @var \Magento\Directory\Model\RegionFactory
      */
@@ -122,7 +127,24 @@ class Store extends \Magento\Framework\Model\AbstractModel
      * @var UrlPersistInterface
      */
     protected $_urlPersist;
+	
+	/**
+     * Store manager
+     *
+     * @var StoreManagerInterface
+     */
+    protected $_storeManager;
 
+	/**
+     * @var \Magestore\Storepickup\Helper\Url
+     */
+    protected $_storepickupHelperUrl;
+	
+	/**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $_scopeConfig;
+	
     /**
      * Store constructor.
      *
@@ -154,6 +176,9 @@ class Store extends \Magento\Framework\Model\AbstractModel
         StoreUrlPathGeneratorInterface $storeUrlPathGenerator,
         StoreUrlRewriteGeneratorInterface $storeUrlRewriteGenerator,
         UrlPersistInterface $urlPersist,
+		\Magento\Store\Model\StoreManagerInterface $storeManager,
+		\Magestore\Storepickup\Helper\Url $storepickupHelperUrl,
+		\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = NULL,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = NULL,
         array $data = []
@@ -174,6 +199,10 @@ class Store extends \Magento\Framework\Model\AbstractModel
         $this->_storeUrlPathGenerator = $storeUrlPathGenerator;
         $this->_storeUrlRewriteGenerator = $storeUrlRewriteGenerator;
         $this->_urlPersist = $urlPersist;
+		
+		$this->_storeManager = $storeManager;
+		$this->_storepickupHelperUrl = $storepickupHelperUrl;
+		$this->_scopeConfig = $scopeConfig;
     }
 
     /**
@@ -197,9 +226,8 @@ class Store extends \Magento\Framework\Model\AbstractModel
     }
 
     /**
-     * Prepare rewrite request path for store before save.
-     *
      * @return $this
+     * @throws LocalizedException
      */
     protected function _prepareRewriteRequestPath()
     {
@@ -751,5 +779,105 @@ class Store extends \Magento\Framework\Model\AbstractModel
     public function getMetaKeywords()
     {
         return $this->getData('meta_keywords') ? $this->getData('meta_keywords') : $this->getStoreName();
+    }
+	
+	public function import() 
+	{
+        $data = $this->getData();
+        //prepare status
+        $data['status'] = 1;
+        //check exited store
+        $collection = $this->getCollection()
+                ->addFieldToFilter('store_name', $data['store_name'])
+                ->addFieldToFilter('address', $data['address']);
+
+        if (count($collection))
+            return false;
+
+        if (!isset($data['store_name']) || $data['store_name'] == '')
+            return false;
+        if (!isset($data['address']) || $data['address'] == '')
+            return false;
+        if (!isset($data['city']) || $data['city'] == '')
+            return false;
+        if (!isset($data['country']) || $data['country'] == '')
+            return false;
+        if (!isset($data['zipcode']) || $data['zipcode'] == '')
+            return false;
+
+
+        $storeName = strtolower(trim($data['store_name'], ' '));
+
+        $storeName = $this->_storepickupHelperUrl->characterSpecial($storeName);
+        $check = 1;
+        while ($check == 0) {
+            $stores = $this->getCollection()
+                    ->addFieldToFilter('url_id_path', $storeName)
+                    ->getFirstItem();
+
+            if ($stores->getId()) {
+                $storeName = $storeName . '-1';
+            } else {
+                $check = 0;
+            }
+        }
+
+        $data['url_id_path'] = $storeName;
+
+        $this->setData($data);	
+		$this->save();  	
+        
+        $allstores = $this->_storeManager->getStores();
+        foreach ($allstores as $store) {	
+			$this->setStoreId($store->getStoreId())
+				->updateUrlKey();				
+        }
+		
+        return $this->getId();
+    }
+	
+	public function setStoreId($value) {
+        $this->_storeId = $value;
+        return $this;
+    }
+
+    public function getStoreId() {
+        return $this->_storeId;
+    }
+	
+	public function updateUrlKey($rewriteRequestPath = '') {
+        $id = $this->getId();
+        $storeId = $this->_storeId;
+        if (!$storeId) {
+            $storeId = 0;
+        }
+
+        $url_key = $rewriteRequestPath ? $rewriteRequestPath : $this->getData('url_id_path');
+        $url_suffix = $this->_scopeConfig->getValue(
+			'catalog/seo/product_url_suffix',
+			\Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+			$this->_storeManager->getStore()->getStoreId()
+		);
+		$urlrewrite = $this->loadByIdpath($url_key, $storeId);
+
+		// $urlrewrite->setData('id_path', $url_key);
+		$urlrewrite->setData('request_path','storepickup/'. $url_key.$url_suffix);
+		$urlrewrite->setData('target_path', 'storepickup/index/index/viewstore/' . $id);
+		$urlrewrite->setData('store_id', $storeId);
+		
+        try {
+           $urlrewrite->save();
+        } catch (Exception $e) {
+			
+        }
+    }
+	
+	public function loadByIdpath($idPath, $storeId) {
+		$model = $this->_urlRewriteCollectionFactory->create()
+				// ->addFieldToFilter('id_path', $idPath)
+				->addFieldToFilter('store_id', $storeId)
+				->getFirstItem();
+        
+        return $model;
     }
 }
