@@ -41,7 +41,7 @@ class ImportProcess extends Store
         if (isset($_FILES['filecsv'])) {
             if (substr($_FILES['filecsv']["name"], -4)!='.csv') {
                 $this->messageManager->addError(__('Please choose a CSV file'));
-                return $resultRedirect->setPath('*/*/import');
+                return $resultRedirect->setPath('*/*/importstore');
             }
 			
 			$fileName = $_FILES['filecsv']['tmp_name'];
@@ -65,6 +65,12 @@ class ImportProcess extends Store
 						for ($i = 0; $i < count($row); $i++) {
 							$storeData[$index_row[$i]] = $row[$i];
 						}
+
+						if(!isset($storeData['monday_status'])){
+							$this->messageManager->addError(__('Please follow the sample file\'s format to import stores properly.'));
+							return $resultRedirect->setPath('*/*/importstore');
+						}
+
 						if ($storeData['monday_status'] == 0 || !$storeData['monday_status']) {
 							$storeData['monday_status'] = 1;
 						}
