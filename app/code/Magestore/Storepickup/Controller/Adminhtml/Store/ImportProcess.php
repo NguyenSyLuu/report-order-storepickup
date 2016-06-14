@@ -70,11 +70,9 @@ class ImportProcess extends Store
 							$storeData['state_id'] = $helperRegion->validateState($storeData['country_id'],$storeData['state']);
 
 						if(isset($storeData['state_id']) && $storeData['state_id'] == \Magestore\Storepickup\Helper\Region::STATE_ERROR){
-							$_state = $storeData['state_id'] == '' ? 'null' : $storeData['state_id'];
-							if($flag == 1)
-								$error_message .= ' <br />'.$flag.': '.$_state.' of <strong>'.$storeData['store_name'].'</strong><br />';
-							else
-								$error_message .= $flag.': '.$_state.' of <strong>'.$storeData['store_name'].'</strong><br />';
+							$_state = $storeData['state_id'] == '' || $storeData['state_id'] == -1 ? 'null' : $storeData['state_id'];
+							$error_message .= ' <br />'.$flag.': '.$_state.' of <strong>'.$storeData['store_name'].'</strong>';
+							$flag++;
 						}
 
 						if(isset($storeData['state_id']))
@@ -94,7 +92,9 @@ class ImportProcess extends Store
 							}
 
 						}
+
 					}
+
 				}
 
 				if($error_message != ''){
