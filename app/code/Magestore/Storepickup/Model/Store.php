@@ -784,12 +784,14 @@ class Store extends AbstractModel
 	public function import() 
 	{
         $data = $this->getData();
+
         //prepare status
         $data['status'] = 1;
         //check exited store
         $collection = $this->getCollection()
                 ->addFieldToFilter('store_name', $data['store_name'])
                 ->addFieldToFilter('address', $data['address']);
+
 
         if (count($collection))
             return false;
@@ -800,11 +802,10 @@ class Store extends AbstractModel
             return false;
         if (!isset($data['city']) || $data['city'] == '')
             return false;
-        if (!isset($data['country']) || $data['country'] == '')
+        if (!isset($data['country_id']) || $data['country_id'] == '')
             return false;
         if (!isset($data['zipcode']) || $data['zipcode'] == '')
             return false;
-
 
         $storeName = strtolower(trim($data['store_name'], ' '));
 
@@ -825,8 +826,8 @@ class Store extends AbstractModel
         $data['url_id_path'] = $storeName;
 
         $this->setData($data);	
-		$this->save();  	
-        
+		$this->save();
+
         $allstores = $this->_storeManager->getStores();
         foreach ($allstores as $store) {	
 			$this->setStoreId($store->getStoreId())

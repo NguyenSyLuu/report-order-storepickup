@@ -66,72 +66,11 @@ class ImportProcess extends Store
 							$storeData[$index_row[$i]] = $row[$i];
 						}
 
-//						if(!isset($storeData['monday_status'])){
-//							$this->messageManager->addError(__('Please follow the sample file\'s format to import stores properly.'));
-//							return $resultRedirect->setPath('*/*/importstore');
-//						}
-
-						if (isset($storeData['monday_status']) && $storeData['monday_status'] == 0 || !$storeData['monday_status']) {
-							$storeData['monday_status'] = 1;
-						}
-
-						if (isset($storeData['tuesday_status']) && $storeData['tuesday_status'] == 0 || !$storeData['tuesday_status']) {
-							$storeData['tuesday_status'] = 1;
-						}
-
-						if (isset($storeData['wednesday_status']) && $storeData['wednesday_status'] == 0 || !$storeData['wednesday_status']) {
-							$storeData['wednesday_status'] = 1;
-						}
-
-						if (isset($storeData['thursday_status']) && $storeData['thursday_status'] == 0 || !$storeData['thursday_status']) {
-							$storeData['thursday_status'] = 1;
-						}
-
-						if (isset($storeData['friday_status']) && $storeData['friday_status'] == 0 || !$storeData['friday_status']) {
-							$storeData['friday_status'] = 1;
-						}
-
-						if (isset($storeData['saturday_status']) && $storeData['saturday_status'] == 0 || !$storeData['saturday_status']) {
-							$storeData['saturday_status'] = 1;
-						}
-
-						if (isset($storeData['sunday_status']) && $storeData['sunday_status'] == 0 || !$storeData['sunday_status']) {
-							$storeData['sunday_status'] = 1;
-						}
-
-						if (isset($storeData['monday_time_interval']) && $storeData['monday_time_interval'] == 0 || !$storeData['monday_time_interval']) {
-							$storeData['monday_time_interval'] = 15;
-						}
-
-						if (isset($storeData['tuesday_time_interval']) && $storeData['tuesday_time_interval'] == 0 || !$storeData['tuesday_time_interval']) {
-							$storeData['tuesday_time_interval'] = 15;
-						}
-
-						if (isset($storeData['wednesday_time_interval']) && $storeData['wednesday_time_interval'] == 0 || !$storeData['wednesday_time_interval']) {
-							$storeData['wednesday_time_interval'] = 15;
-						}
-
-						if (isset($storeData['thursday_time_interval']) && $storeData['thursday_time_interval'] == 0 || !$storeData['thursday_time_interval']) {
-							$storeData['thursday_time_interval'] = 15;
-						}
-
-						if (isset($storeData['friday_time_interval']) && $storeData['friday_time_interval'] == 0 || !$storeData['friday_time_interval']) {
-							$storeData['friday_time_interval'] = 15;
-						}
-
-						if (isset($storeData['saturday_time_interval']) && $storeData['saturday_time_interval'] == 0 || !$storeData['saturday_time_interval']) {
-							$storeData['saturday_time_interval'] = 15;
-						}
-
-						if (isset($storeData['sunday_time_interval']) && $storeData['sunday_time_interval'] == 0 || !$storeData['sunday_time_interval']) {
-							$storeData['sunday_time_interval'] = 15;
-						}
-
-						if(isset($storeData['country']) && isset($storeData['state']))
-							$storeData['state_id'] = $helperRegion->validateState($storeData['country'],$storeData['state']);
+						if(isset($storeData['country_id']) && isset($storeData['state']))
+							$storeData['state_id'] = $helperRegion->validateState($storeData['country_id'],$storeData['state']);
 
 						if(isset($storeData['state_id']) && $storeData['state_id'] == \Magestore\Storepickup\Helper\Region::STATE_ERROR){
-							$_state = $storeData['state'] == '' ? 'null' : $storeData['state'];
+							$_state = $storeData['state_id'] == '' ? 'null' : $storeData['state_id'];
 							if($flag == 1)
 								$error_message .= ' <br />'.$flag.': '.$_state.' of <strong>'.$storeData['store_name'].'</strong><br />';
 							else
@@ -143,7 +82,10 @@ class ImportProcess extends Store
 
 						if (isset($storeData['store_name']) && $storeData['store_name'] &&
 							isset($storeData['address']) && $storeData['address'] &&
-							isset($storeData['country']) && $storeData['country'] && $_state_id) {
+							isset($storeData['country_id']) && $storeData['country_id'] && isset($_state_id) && $_state_id) {
+							$storeData['meta_title'] = $storeData['store_name'];
+							$storeData['meta_keywords'] = $storeData['store_name'];
+							$storeData['meta_description'] = $storeData['store_name'];
 							$store->setData($storeData);
 							$store->setId(null);
 
