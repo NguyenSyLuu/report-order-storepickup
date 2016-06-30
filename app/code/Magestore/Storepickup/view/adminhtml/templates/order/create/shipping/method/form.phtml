@@ -104,6 +104,9 @@
                             <script type="text/javascript">
                                 require(['jquery'],function($){
                                     $('.list-store-to-pickup').hide();
+                                    if($('.list-store-select')) $('.list-store-select').val("1");
+                                    if($('#shipping_date')) $('#shipping_date').val("2");
+                                    if($('#shipping_time')) $('#shipping_time').val("2");
                                 });
                             </script>
                     <?php endif;?>

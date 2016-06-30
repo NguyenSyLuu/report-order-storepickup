@@ -89,7 +89,7 @@ class ChangeDate extends \Magento\Framework\App\Action\Action
         // if shipping date is today
         if($shippingDate==$today)
         {
-             if($isSpecialday !== false) //today is a special day
+             if($specialday !== false) //today is a special day
             {
                 $date['html']= $this->_storepickupHelper->generateTimes( $date['time_open'],  $date['time_close'], $thisTime);
                 return $this->getResponse()->setBody(\Zend_Json::encode($date));
