@@ -125,10 +125,10 @@ class AdminhtmlSaveStorepickupDecription implements ObserverInterface
                         unset($datashipping['telephone']);
                     }
 
-                    $datashipping['save_in_address_book'] = 1;
+                    $datashipping['save_in_address_book']  = 0;
 
                     $order->getShippingAddress()->addData($datashipping);
-                    //$order->sendNewOrderEmail();
+                    //$order->sendNewOrderEmail ();
                     //$this->_storepickupHelperEmail->sendNoticeEmailToStoreOwner($order,$store);
                     //$this->_storepickupHelperEmail->sendNoticeEmailToAdmin($order,$store);
                 }
