@@ -24,7 +24,7 @@ define(
         quote.paymentMethod.subscribe(function () {
             if (quote.shippingMethod().carrier_code == 'storepickup') {
                 var mapImage= '<br/><img src="http://maps.google.com/maps/api/staticmap?center=' + storePikcuplatitude + ',' + storePikcuplongitude + '&zoom=15&size=200x200&markers=color:red|label:S|' + storePikcuplatitude + ',' + storePikcuplongitude + '&sensor=false" />';
-                $('.payment-method-billing-address').html("Pickup at Store: <br/>"+$('.info-store-checkout').html());
+                //$('.payment-method-billing-address').html("Pickup at Store: <br/>"+$('.info-store-checkout').html());
                 $('.ship-to .shipping-information-content').html($('.info-store-checkout').html());
                 if(!($('.storePickupreview').length>0)) {
                     $('.ship-via .shipping-information-content').append(mapImage);
