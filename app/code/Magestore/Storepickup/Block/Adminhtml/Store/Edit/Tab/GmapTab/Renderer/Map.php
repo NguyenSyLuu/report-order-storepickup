@@ -68,13 +68,31 @@ class Map extends \Magento\Backend\Block\Widget implements RendererInterface
      * @param \Magento\Backend\Block\Template\Context $context
      * @param array                                   $data
      */
+
+    /**
+     * @var \Magestore\Storepickup\Model\SystemConfig
+     */
+
+    protected $_systemConfig;
+	
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
+        \Magestore\Storepickup\Model\SystemConfig $systemConfig,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->_coreRegistry = $registry;
+		$this->_systemConfig = $systemConfig;
+    }
+
+    /**
+     * @param null $store
+     * @return mixed
+     */
+	 public function getGoolgeApiKey($store = null)
+    {
+        return $this->_systemConfig->getGoolgeApiKey();
     }
 
     /**

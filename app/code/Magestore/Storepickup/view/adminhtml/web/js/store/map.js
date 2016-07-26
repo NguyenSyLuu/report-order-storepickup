@@ -19,10 +19,10 @@
  */
 define([
     'jquery',
-    'Magestore_Storepickup/js/store/map/map-loader',
+    //'Magestore_Storepickup/js/store/map/map-loader',
     'mage/template',
     'jquery/ui',
-], function($, Maploader, mageTemplate) {
+], function($, /*Maploader,*/ mageTemplate) {
     "use strict";
     $.widget('magestore.gmap', {
         options: {
@@ -43,13 +43,13 @@ define([
             this._initOption();
             this.infowindowTemplate = mageTemplate($('.map-template').html());
 
-            try{
+            /*try{
                 Maploader.done($.proxy(this._initMap, this)).fail(function() {
                     console.error("ERROR: Google maps library failed to load");
                 });
             } catch(e) {
                 console.trace();
-            }
+            }*/
         },
         _defaultOption:  function(name, defaultValue) {
             if(this.options[name] === '' || this.options[name] === null || typeof this.options[name] === 'undefined') {
