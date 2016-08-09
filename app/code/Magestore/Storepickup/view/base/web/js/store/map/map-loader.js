@@ -27,7 +27,7 @@ define(['jquery'], function($) {
             google_maps_loaded_def.resolve(google.maps);
         }
 
-        require(['https://maps.googleapis.com/maps/api/js?key=AIzaSyA4rAT0fdTZLNkJ5o0uaAwZ89vVPQpr_Kc&sensor=false&callback=google_maps_loaded&libraries=places,geometry'], function() {}, function(err) {
+        require(['https://maps.googleapis.com/maps/api/js?key='+window.googleMapApiKey+'&sensor=false&callback=google_maps_loaded&libraries=places,geometry'], function() {}, function(err) {
             google_maps_loaded_def.reject();
         });
 
