@@ -96,7 +96,6 @@
                         <arguments>
                             <argument name="header" xsi:type="string" translate="true">Date Start</argument>
                             <argument name="type" xsi:type="string">date</argument>
-                            <argument name="format" xsi:type="string">MM/dd/YYYY</argument>
                             <argument name="index" xsi:type="string">date_from</argument>
                             <argument name="id" xsi:type="string">date_from</argument>
                         </arguments>
@@ -105,7 +104,6 @@
                         <arguments>
                             <argument name="header" xsi:type="string" translate="true">Date End</argument>
                             <argument name="type" xsi:type="string">date</argument>
-                            <argument name="format" xsi:type="string">MM/dd/YYYY</argument>
                             <argument name="index" xsi:type="string">date_to</argument>
                             <argument name="id" xsi:type="string">date_to</argument>
                         </arguments>
