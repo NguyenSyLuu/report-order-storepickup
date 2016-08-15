@@ -348,6 +348,7 @@
         <column name="storepickup_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
                     <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="sortable" xsi:type="boolean">true</item>
@@ -361,6 +362,7 @@
         <column name="store_name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">
@@ -377,6 +379,7 @@
         <column name="address">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">
@@ -393,6 +396,7 @@
         <column name="city">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                     </item>
@@ -406,6 +410,7 @@
         <column name="state">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                     </item>
@@ -420,6 +425,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magestore\Storepickup\Model\Store\Option\Country</item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
@@ -433,6 +439,7 @@
         <column name="zipcode">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                     </item>
@@ -594,6 +601,7 @@
                     </item>
                 </item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>

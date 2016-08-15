@@ -337,6 +337,7 @@
         <column name="holiday_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
                     <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="sortable" xsi:type="boolean">true</item>
@@ -349,6 +350,7 @@
         <column name="holiday_name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">
@@ -365,6 +367,7 @@
         <column name="date_from">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">date</item>
                         <item name="validation" xsi:type="array">
@@ -382,6 +385,7 @@
         <column name="date_to">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">date</item>
                         <item name="validation" xsi:type="array">
@@ -399,6 +403,7 @@
         <column name="holiday_comment">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
                     <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="dataType" xsi:type="string">text</item>

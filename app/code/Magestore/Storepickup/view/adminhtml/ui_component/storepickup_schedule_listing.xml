@@ -351,6 +351,7 @@
         <column name="schedule_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
                     <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
                     <item name="sortable" xsi:type="boolean">true</item>
@@ -363,6 +364,7 @@
         <column name="schedule_name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                         <item name="validation" xsi:type="array">
@@ -380,6 +382,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magestore\Storepickup\Model\Schedule\Option\WeekdayStatus</item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
@@ -438,6 +441,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magestore\Storepickup\Model\Schedule\Option\WeekdayStatus</item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
@@ -496,6 +500,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magestore\Storepickup\Model\Schedule\Option\WeekdayStatus</item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
@@ -554,6 +559,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magestore\Storepickup\Model\Schedule\Option\WeekdayStatus</item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
@@ -612,6 +618,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magestore\Storepickup\Model\Schedule\Option\WeekdayStatus</item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
@@ -670,6 +677,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magestore\Storepickup\Model\Schedule\Option\WeekdayStatus</item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
@@ -728,6 +736,7 @@
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Magestore\Storepickup\Model\Schedule\Option\WeekdayStatus</item>
                 <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">select</item>
                     </item>
