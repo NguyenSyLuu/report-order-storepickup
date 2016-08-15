@@ -74,6 +74,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             [
                 'label' => __('Save and New'),
                 'class' => 'save',
+                'onclick' => 'toggleButtonSaveAndNew()',
                 'data_attribute' => [
                     'mage-init' => [
                         'button' => ['event' => 'saveAndNew', 'target' => '#edit_form'],
@@ -83,14 +84,41 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             10
         );
 
-        $this->_formScripts[] = "
+        $this->_formScripts[] = '   
             function toggleEditor() {
-                if (tinyMCE.getInstanceById('holiday_content') == null) {
-                    tinyMCE.execCommand('mceAddControl', false, 'holiday_content');
+                if (tinyMCE.getInstanceById(\'holiday_content\') == null) {
+                    tinyMCE.execCommand(\'mceAddControl\', false, \'holiday_content\');
                 } else {
-                    tinyMCE.execCommand('mceRemoveControl', false, 'holiday_content');
+                    tinyMCE.execCommand(\'mceRemoveControl\', false, \'holiday_content\');
                 }
             }
-        ";
+
+            function toggleButtonSaveAndNew(){
+                     
+                        
+                    require([
+                            "jquery",
+                            "underscore",
+                            "mage/mage",
+                            "mage/backend/tabs",
+                            "domReady!"
+                        ], function($) {
+                       
+                            var $form = $(\'#edit_form\');
+                            $form.mage(\'form\', {
+                                handlersData: {
+                                    save: {},
+                                    saveAndNew: {
+                                        action: {
+                                            args: {back: \'new\'}
+                                        }
+                                    },
+                                }
+                            });
+
+                        });
+                    }
+        }
+        ';
     }
 }

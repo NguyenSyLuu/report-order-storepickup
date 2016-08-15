@@ -72,6 +72,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             'new-button',
             [
                 'label' => __('Save and New'),
+                'onclick'=>'toggleButtonSaveAndNew()',
                 'class' => 'save',
                 'data_attribute' => [
                     'mage-init' => [
@@ -82,16 +83,40 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             10
         );
 
-        $this->_formScripts[] = "
-            function toggleEditor() {
-                if (tinyMCE.getInstanceById('specialday_content') == null) {
-                    tinyMCE.execCommand('mceAddControl', false, 'specialday_content');
+        $this->_formScripts[] = ' function toggleEditor() {
+                if (tinyMCE.getInstanceById(\'specialday_content\') == null) {
+                    tinyMCE.execCommand(\'mceAddControl\', false, \'specialday_content\');
                 } else {
-                    tinyMCE.execCommand('mceRemoveControl', false, 'specialday_content');
+                    tinyMCE.execCommand(\'mceRemoveControl\', false, \'specialday_content\');
                 }
             }
+            require([\'Magestore_Storepickup/js/form/specialday\']);  
+            
+            function toggleButtonSaveAndNew(){
+                     
+                        
+                    require([
+                            "jquery",
+                            "underscore",
+                            "mage/mage",
+                            "mage/backend/tabs",
+                            "domReady!"
+                        ], function($) {
+                       
+                            var $form = $(\'#edit_form\');
+                            $form.mage(\'form\', {
+                                handlersData: {
+                                    save: {},
+                                    saveAndNew: {
+                                        action: {
+                                            args: {back: \'new\'}
+                                        }
+                                    },
+                                }
+                            });
 
-            require(['Magestore_Storepickup/js/form/specialday']);
-        ";
+                        });
+             }          
+            ';
     }
 }
