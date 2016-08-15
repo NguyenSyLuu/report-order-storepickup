@@ -71,12 +71,24 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Framework\Filesystem
      */
     protected $_filesystem;
-    /**
-     * Block constructor.
-     *
-     * @param \Magento\Framework\App\Helper\Context $context
-     */
 
+    /**
+     * @var \Magestore\Storepickup\Model\SystemConfig
+     */
+    protected $_systemConfig;
+
+    /**
+     * Data constructor.
+     * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Magestore\Storepickup\Model\Factory $factory
+     * @param \Magento\Backend\Block\Widget\Grid\Column\Renderer\Options\Converter $converter
+     * @param \Magento\Backend\Helper\Js $backendHelperJs
+     * @param \Magento\Framework\Filesystem $filesystem
+     * @param \Magento\Backend\Model\Session $backendSession
+     * @param \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory
+     * @param \Magestore\Storepickup\Model\StoreFactory $storeFactory
+     * @param \Magestore\Storepickup\Model\SystemConfig $systemConfig
+     */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magestore\Storepickup\Model\Factory $factory,
@@ -85,7 +97,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Backend\Model\Session $backendSession,
         \Magestore\Storepickup\Model\ResourceModel\Store\CollectionFactory $storeCollectionFactory,
-        \Magestore\Storepickup\Model\StoreFactory $storeFactory
+        \Magestore\Storepickup\Model\StoreFactory $storeFactory,
+        \Magestore\Storepickup\Model\SystemConfig $systemConfig
     ) {
         parent::__construct($context);
         $this->_factory = $factory;
@@ -95,6 +108,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->_backendSession = $backendSession;
         $this->_storeCollectionFactory = $storeCollectionFactory;
         $this->_storeFactory = $storeFactory;
+        $this->_systemConfig = $systemConfig;
     }
 
     /**
@@ -241,6 +255,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getBaseDirMedia()
     {
         return $this->_filesystem->getDirectoryRead('media');
+    }
+
+
+    /**
+     * @param null $store
+     * @return mixed
+     */
+    public function getGoolgeApiKey($store = null)
+    {
+        return $this->_systemConfig->getGoolgeApiKey();
     }
 
 }
