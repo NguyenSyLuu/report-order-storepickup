@@ -19,7 +19,7 @@ class PaymentMethods implements \Magento\Framework\Option\ArrayInterface
         $storeCollection = $this->_collectionFactory->getActiveMethods();
         if(!count($storeCollection))return;
 
-        $options = array();
+        $options = array() ;
 
         foreach($storeCollection as $item)
         {

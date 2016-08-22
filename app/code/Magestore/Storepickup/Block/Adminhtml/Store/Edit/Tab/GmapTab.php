@@ -94,6 +94,7 @@ class GmapTab extends \Magento\Backend\Block\Widget\Form\Generic implements \Mag
                 'name' => 'city',
                 'label' => __('City'),
                 'title' => __('City'),
+                'required' => true,
                 'placeholder' => 'City',
             ]
         );
@@ -105,6 +106,7 @@ class GmapTab extends \Magento\Backend\Block\Widget\Form\Generic implements \Mag
                 'name' => 'zipcode',
                 'label' => __('Zip Code'),
                 'title' => __('Zip Code'),
+                'required' => true,
                 'placeholder' => 'Zip Code',
             ]
         );
