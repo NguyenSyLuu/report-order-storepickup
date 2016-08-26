@@ -27,7 +27,8 @@
                 <enable_frontend>1</enable_frontend>
                 <display_toplink>1</display_toplink>
                 <order_type>0</order_type>
-                <limit_day>60</limit_day>
+                <page_title>Store Pickup</page_title>
+                <limit_day>30</limit_day>
                 <display_toplink>1</display_toplink>
                 <page_title>Store pickup</page_title>
                 <limit_image_gallery>30</limit_image_gallery>
@@ -46,12 +47,15 @@
         <carriers>
             <storepickup>
                 <active>1</active>
+                <title>Store Pickup</title>
+                <name>Store Pickup</name>
+                <price>Store Pickup</price>
+                <type>Store Pickup</type>
+                <display_pickuptime>1</display_pickuptime>
+                <time_interval>30</time_interval>
                 <sallowspecific>0</sallowspecific>
                 <model>Magestore\Storepickup\Model\Carrier\Method</model>
-                <name>Store Pickup</name>
-                <price>0.00</price>
-                <title>Store Pickup</title>
-                <type>I</type>
+                <type>1</type>
                 <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
                 <handling_type>F</handling_type>
             </storepickup>

@@ -19,7 +19,7 @@
  */
 define([
     'jquery',
-    //'Magestore_Storepickup/js/store/map/map-loader',
+    'Magestore_Storepickup/js/store/map/map-loader',
     'mage/template',
     'Magestore_Storepickup/js/pagination',
     'Magestore_Storepickup/js/liststore',
@@ -28,7 +28,7 @@ define([
     'Magestore_Storepickup/js/tag',
     'jquery/ui',
     'mage/translate'
-], function($, /*Maploader,*/ mageTemplate) {
+], function($, Maploader, mageTemplate) {
     'use strict';
 
     $.widget('magestore.GoogleMap', {

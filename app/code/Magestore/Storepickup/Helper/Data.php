@@ -238,6 +238,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         return $contents;
     }
+
+    public function getGoogleApiKey()
+    {
+        return $this->scopeConfig->getValue('storepickup/service/google_api_key', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    }
     public function getBaseDirMedia()
     {
         return $this->_filesystem->getDirectoryRead('media');
