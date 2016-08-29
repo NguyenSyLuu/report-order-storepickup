@@ -20,25 +20,32 @@
  * @license     http://www.magestore.com/license-agreement.html
  */
 
-namespace Magestore\Storepickup\Block;
+namespace Magestore\Storepickup\Controller\Adminhtml\Store;
+
+use Magento\Framework\Controller\ResultFactory;
 
 /**
+ * NewAction Store Action.
+ *
  * @category Magestore
  * @package  Magestore_Storepickup
  * @module   Storepickup
  * @author   Magestore Developer
  */
-class Store extends \Magestore\Storepickup\Block\AbstractBlock
+class Importstore extends \Magestore\Storepickup\Controller\Adminhtml\Store
 {
     /**
-     * Store constructor.
-     * @param Context $context
-     * @param array $data
+     * Create new Store.
+     *
+     * @return \Magento\Framework\Controller\ResultInterface
      */
-    public function __construct(
-        \Magestore\Storepickup\Block\Context $context,
-        array $data = []
-    ) {
-        parent::__construct($context, $data);
+    public function execute()
+    {
+        /** @var \Magento\Framework\Controller\Result\Forward $resultForward */
+        $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        $this->initPage($resultPage);
+        $resultPage->getConfig()->getTitle()->prepend(__('Import Stores'));
+
+        return $resultPage;
     }
 }
