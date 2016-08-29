@@ -141,7 +141,7 @@
                     <depends>
                         <field id="paymentmethod">1</field>
                     </depends>
-                    <source_model>Magestore\Storepickup\Model\Config\Source\PaymentMethods</source_model>
+                    <source_model>Magestore\Storepickup\Model\Config\Source\Paymentmethods</source_model>
                 </field>
                 <field id="sallowspecific" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Ship to Applicable Countries</label>
