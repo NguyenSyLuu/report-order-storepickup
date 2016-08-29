@@ -74,7 +74,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             [
                 'label' => __('Save and New'),
                 'class' => 'save',
-                'onclick' => 'toggleButtonSaveAndNew()',
                 'data_attribute' => [
                     'mage-init' => [
                         'button' => ['event' => 'saveAndNew', 'target' => '#edit_form'],
@@ -93,7 +92,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                 }
             }
 
-            function toggleButtonSaveAndNew(){
                      
                         
                     require([
@@ -118,7 +116,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
 
                         });
                     }
-        }
+        
         ';
     }
 }

@@ -81,7 +81,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             [
                 'label' => __('Save and New'),
                 'class' => 'save',
-                'onclick'=> 'toggleButtonSaveAndNew()',
                 'data_attribute' => [
                     'mage-init' => [
                         'button' => ['event' => 'saveAndNew', 'target' => '#edit_form'],
@@ -99,7 +98,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                     tinyMCE.execCommand(\'mceRemoveControl\', false, \'store_content\');
                 }
             }
-        function toggleButtonSaveAndNew(){
+     
                               
                     require([
                             "jquery",
@@ -122,7 +121,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                             });
 
                         }); 
-        }
+        
         ';
     }
 }

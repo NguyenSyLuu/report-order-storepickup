@@ -72,7 +72,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             'new-button',
             [
                 'label' => __('Save and New'),
-                'onclick'=>'toggleButtonSaveAndNew()',
                 'class' => 'save',
                 'data_attribute' => [
                     'mage-init' => [
@@ -92,7 +91,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             }
             require([\'Magestore_Storepickup/js/form/specialday\']);  
             
-            function toggleButtonSaveAndNew(){
+           
                      
                         
                     require([
@@ -116,7 +115,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
                             });
 
                         });
-             }          
+                     
             ';
     }
 }
