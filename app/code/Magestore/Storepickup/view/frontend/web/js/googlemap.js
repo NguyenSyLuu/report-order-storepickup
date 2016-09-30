@@ -17,6 +17,9 @@
  * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
  * @license     http://www.magestore.com/license-agreement.html
  */
+
+var newmap;
+
 define([
     'jquery',
     'Magestore_Storepickup/js/store/map/map-loader',
@@ -84,12 +87,13 @@ define([
                 maxZoom: options.maxZoom
             });
 
+
             /**
              * marker cluster
              * @type {*|k}
              */
             this.markerClusterer = new MarkerClusterer(this.map, [], {
-				styles: mcOptions,
+                styles: mcOptions,
                 gridSize: 10,
                 maxZoom: 15
             } );
@@ -225,9 +229,15 @@ define([
             this.map.controls[google.maps.ControlPosition.LEFT_TOP].push($('.location-box-view')[0]);
 
             $('.location-box-view').click(this.currentPosition.bind(this));
-
+            newmap = this.map;//Silver and Richard
             this.loadStore({curPage: 1});
         },
+
+        //Silver and Richard
+        //getNewMap: function () {
+        // return this.map;
+        //},
+
 
         getParams: function () {
             var params = {

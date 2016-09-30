@@ -5,9 +5,10 @@ define(
         'mage/url',
         'mage/translate',
         'mage/template',
-        'jquery/ui'
+        'jquery/ui',
+        'Magestore_Storepickup/js/checkout/storepickupcheckout'
     ],
-    function ($, quote, url, $t, mageTemplate) {
+    function ($, quote, url, $t, mageTemplate, newMap) {
         var liststoreJson = window.liststoreJson;
 
         function getSelectListStoreHtml() {
@@ -33,6 +34,10 @@ define(
                     $('.storepickup-information').append(select_store_by_map);
                     $('#select_store_by_map').click(function () {
                         $('#popup-mpdal').modal('openModal');
+                        //if(typeof newMap != 'undefined'){
+                        //var   map = newMap.getNewMap();
+                        google.maps.event.trigger(newmap, "resize");  //Silver and Richard
+                        //}
                     });
                     //change Store function
                     $('.list-store-select').change(function () {
