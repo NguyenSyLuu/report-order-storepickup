@@ -46,8 +46,11 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $installer = $setup;
         $installer->startSetup();
 
-        if (version_compare($context->getVersion(), '1.0.1', '<')) {
+        if (version_compare($context->getVersion(), '0.1.1', '<')) {
             $this->changeColumnImage($setup);
+        }
+        if (version_compare($context->getVersion(), '1.1.0', '<')) {
+            $this->addOwnerInformation($setup);
         }
 
         $installer->endSetup();
@@ -116,6 +119,26 @@ class UpgradeSchema implements UpgradeSchemaInterface
             'storepickup_id',
             \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         );
+
+    }
+    public function addOwnerInformation(SchemaSetupInterface $setup)
+    {
+        $setup->getConnection()->addColumn(
+            $setup->getTable(StorepickupShema::SCHEMA_STORE),
+            'owner_name',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT
+        );
+        $setup->getConnection()->addColumn(
+            $setup->getTable(StorepickupShema::SCHEMA_STORE),
+            'owner_email',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT
+        );
+        $setup->getConnection()->addColumn(
+            $setup->getTable(StorepickupShema::SCHEMA_STORE),
+            'owner_phone',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT
+        );
+
 
     }
 }

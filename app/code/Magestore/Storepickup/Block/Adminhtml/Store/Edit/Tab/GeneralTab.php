@@ -170,6 +170,44 @@ class GeneralTab extends \Magento\Backend\Block\Widget\Form\Generic implements \
             ]
         );
 
+        $fieldset = $form->addFieldset(
+            'owner_information',
+            [
+                'legend' => __('Owner Information'),
+                'collapsable' => true,
+            ]
+        );
+
+        $fieldset->addField(
+            'owner_name',
+            'text',
+            [
+                'name' => 'owner_name',
+                'label' => __("Owner's name"),
+                'title' => __("Owner's name"),
+            ]
+        );
+
+        $fieldset->addField(
+            'owner_email',
+            'text',
+            [
+                'name' => 'owner_email',
+                'label' => __('Owner\' Email'),
+                'title' => __('Owner\' Email'),
+            ]
+        );
+
+        $fieldset->addField(
+            'owner_phone',
+            'text',
+            [
+                'name' => 'owner_phone',
+                'label' => __('Owner\' Phone'),
+                'title' => __('Owner\' Phone'),
+            ]
+        );
+
         /*
          * Meta Information Field Set
          */
