@@ -65,7 +65,7 @@ $mcOptions= array (
 		var mcOptions = JSON.parse('<?php echo $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($mcOptions) ?>');
         var loadStoreURL = '<?php echo $block->getUrl('storepickup/index/loadstore') ?>';
         if(window.location.href.slice(0,5)=='https') loadStoreURL= loadStoreURL.replace("http:","https:");
-        require(['jquery', 'Magestore_Storepickup/js/googlemap', 'Magestore_Storepickup/js/makercluster'], function($){
+        require(['jquery', 'Magestore_Storepickup/js/liststore', 'Magestore_Storepickup/js/checkout/liststorecheckout', 'Magestore_Storepickup/js/pagination', 'Magestore_Storepickup/js/googlemap', 'Magestore_Storepickup/js/makercluster'], function($){
             $(document).ready(function ($) {
                 $('.googlemap').GoogleMap({
                     urlLoadStore: loadStoreURL,
