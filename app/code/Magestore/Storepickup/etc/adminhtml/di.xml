@@ -27,6 +27,12 @@
             <argument name="mainCollectionName" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Store\Collection</argument>
         </arguments>
     </type>
+    <type name="Magestore\Storepickup\Controller\Adminhtml\Report">
+        <arguments>
+            <argument name="mainModelName" xsi:type="string">Magestore\Storepickup\Model\Store</argument>
+            <argument name="mainCollectionName" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Store\Collection</argument>
+        </arguments>
+    </type>
     <type name="Magestore\Storepickup\Controller\Adminhtml\Tag">
         <arguments>
             <argument name="mainModelName" xsi:type="string">Magestore\Storepickup\Model\Tag</argument>

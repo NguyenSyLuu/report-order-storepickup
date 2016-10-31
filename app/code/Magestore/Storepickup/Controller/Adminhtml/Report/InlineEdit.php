@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?php
+
 /**
  * Magestore
  *
@@ -19,7 +19,26 @@
  * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
  * @license     http://www.magestore.com/license-agreement.html
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-  <module name="Magestore_Storepickup" setup_version="1.1.1"/>
-</config>
+
+namespace Magestore\Storepickup\Controller\Adminhtml\Store;
+
+/**
+ * Inline Edit Action
+ *
+ * @category Magestore
+ * @package  Magestore_Storepickup
+ * @module   Storepickup
+ * @author   Magestore Developer
+ */
+class InlineEdit extends \Magestore\Storepickup\Controller\Adminhtml\AbstractInlineEdit
+{
+    /**
+     * Check the permission to run it.
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Magestore_Storepickup::store');
+    }
+}

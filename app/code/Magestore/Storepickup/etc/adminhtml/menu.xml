@@ -28,6 +28,7 @@
         <add id="Magestore_Storepickup::schedule" title="Manage Schedule" resource="Magestore_Storepickup::schedule" parent="Magestore_Storepickup::storepickup" action="storepickupadmin/schedule" module="Magestore_Storepickup" sortOrder="20"/>
         <add id="Magestore_Storepickup::holiday" title="Manage Holiday" resource="Magestore_Storepickup::holiday" parent="Magestore_Storepickup::storepickup" action="storepickupadmin/holiday" module="Magestore_Storepickup" sortOrder="20"/>
         <add id="Magestore_Storepickup::specialday" title="Manage Special day" resource="Magestore_Storepickup::specialday" parent="Magestore_Storepickup::storepickup" action="storepickupadmin/specialday" module="Magestore_Storepickup" sortOrder="20"/>
+        <add id="Magestore_Storepickup::report" title="Report" resource="Magestore_Storepickup::report" parent="Magestore_Storepickup::storepickup" action="storepickupadmin/report" module="Magestore_Storepickup" sortOrder="20"/>
         <add id="Magestore_Storepickup::guide" title="Guide" module="Magestore_Storepickup" parent="Magestore_Storepickup::storepickup" action="storepickupadmin/guide" resource="Magestore_Storepickup::guide" sortOrder="20" />
         <add id="Magestore_Storepickup::settings" title="Settings" module="Magestore_Storepickup" parent="Magestore_Storepickup::storepickup" action="adminhtml/system_config/edit/section/storepickup" resource="Magestore_Storepickup::settings" sortOrder="20"/>
     </menu>

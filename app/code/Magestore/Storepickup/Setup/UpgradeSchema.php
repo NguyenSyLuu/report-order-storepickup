@@ -39,6 +39,10 @@ use Magestore\Storepickup\Setup\InstallSchema as StorepickupShema;
 class UpgradeSchema implements UpgradeSchemaInterface
 {
     /**
+     * Schema table.
+     */
+    const SCHEMA_REPORT = 'magestore_storepickup_report';
+    /**
      * {@inheritdoc}
      */
     public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
@@ -52,7 +56,81 @@ class UpgradeSchema implements UpgradeSchemaInterface
         if (version_compare($context->getVersion(), '1.1.0', '<')) {
             $this->addOwnerInformation($setup);
         }
+        if (version_compare($context->getVersion(), '1.1.1', '<')) {
 
+            /*
+         * Create table magestore_storepickup_report
+         */
+            $table = $installer->getConnection()->newTable(
+                $installer->getTable(self::SCHEMA_REPORT)
+            )->addColumn(
+                'report_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
+                'Report Id'
+            )->addColumn(
+                'order_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => false, 'default' => '0'],
+                'Order Id'
+            )->addColumn(
+                'storepickup_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => false, 'default' => '0'],
+                'Storepickup Id'
+            )->addColumn(
+                'product_id',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => false, 'default' => '0'],
+                'Product ID'
+            )->addColumn(
+                'product_name',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                255,
+                ['nullable' => true],
+                'Product Name'
+            )->addColumn(
+                'qty',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                null,
+                ['nullable' => true],
+                'Qty'
+            )->addColumn(
+                'date_report',
+                \Magento\Framework\DB\Ddl\Table::TYPE_DATE,
+                null,
+                ['nullable' => true],
+                'Date Report'
+            )->addIndex(
+                $installer->getIdxName(
+                    $installer->getTable(self::SCHEMA_REPORT),
+                    ['order_id'],
+                    AdapterInterface::INDEX_TYPE_INDEX
+                ),
+                ['order_id'],
+                ['type' => AdapterInterface::INDEX_TYPE_INDEX]
+            )->addIndex(
+                $installer->getIdxName(
+                    $installer->getTable(self::SCHEMA_REPORT),
+                    ['product_id'],
+                    AdapterInterface::INDEX_TYPE_INDEX
+                ),
+                ['product_id'],
+                ['type' => AdapterInterface::INDEX_TYPE_INDEX]
+            )->setComment(
+                'Report Table'
+            );
+
+            $installer->getConnection()->createTable($table);
+            /*
+             * End create table magestore_storepickup_report
+             */
+            $this->addOwnerInformation($setup);
+        }
         $installer->endSetup();
     }
 
