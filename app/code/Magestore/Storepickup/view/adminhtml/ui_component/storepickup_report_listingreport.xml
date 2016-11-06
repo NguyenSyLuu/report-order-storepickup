@@ -24,25 +24,10 @@
          xsi:noNamespaceSchemaLocation="../../../../../Magento/Ui/etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">storepickup_report_listingreportreport.storepickup_report_listing_data_source</item>
-            <item name="deps" xsi:type="string">storepickup_report_listingreportreport.storepickup_report_listing_data_source</item>
+            <item name="provider" xsi:type="string">storepickup_report_listingreport.storepickup_report_listing_data_source</item>
+            <item name="deps" xsi:type="string">storepickup_report_listingreport.storepickup_report_listing_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">storepickup_report_columns</item>
-        <item name="buttons" xsi:type="array">
-            <item name="importstore" xsi:type="array">
-                <item name="name" xsi:type="string">importstore</item>
-                <item name="label" xsi:type="string" translate="true">Import Store</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/*/importstore</item>
-            </item>
-            <item name="add" xsi:type="array">
-                <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string" translate="true">Add New Store</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/*/new</item>
-            </item>
-
-        </item>
 
     </argument>
     <dataSource name="storepickup_report_listing_data_source">
@@ -175,11 +160,11 @@
                     </argument>
                 </filterInput>
             </filterRange>
-            <filterInput name="store_name">
+            <filterInput name="product_name">
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
                         <item name="dataScope" xsi:type="string">store_name</item>
-                        <item name="label" xsi:type="string" translate="true">Store Name</item>
+                        <item name="label" xsi:type="string" translate="true">Product Name</item>
                     </item>
                 </argument>
             </filterInput>
@@ -267,15 +252,15 @@
                     <item name="provider" xsi:type="string">storepickup_report_listingreport.storepickup_report_listingreport.listing_top.bookmarks</item>
                     <item name="namespace" xsi:type="string">current</item>
                 </item>
-                <!--<item name="editorConfig" xsi:type="array">-->
-                    <!--<item name="selectProvider" xsi:type="string">storepickup_report_listingreport.storepickup_report_listingreport.storepickup_report_columns.ids</item>-->
-                    <!--<item name="enabled" xsi:type="boolean">true</item>-->
-                    <!--<item name="indexField" xsi:type="string">report_id</item>-->
-                    <!--<item name="clientConfig" xsi:type="array">-->
-                        <!--<item name="saveUrl" xsi:type="url" path="storepickupadmin/store/inlineEdit"/>-->
-                        <!--<item name="validateBeforeSave" xsi:type="boolean">false</item>-->
-                    <!--</item>-->
-                <!--</item>-->
+                <item name="editorConfig" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">storepickup_report_listingreport.storepickup_report_listingreport.storepickup_report_columns.ids</item>
+                    <item name="enabled" xsi:type="boolean">true</item>
+                    <item name="indexField" xsi:type="string">report_id</item>
+                    <item name="clientConfig" xsi:type="array">
+                        <item name="saveUrl" xsi:type="url" path="storepickupadmin/store/inlineEdit"/>
+                        <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                    </item>
+                </item>
                 <item name="childDefaults" xsi:type="array">
                     <item name="fieldAction" xsi:type="array">
                         <item name="provider" xsi:type="string">storepickup_report_listingreport.storepickup_report_listingreport.storepickup_report_columns_editor</item>
@@ -350,20 +335,6 @@
                 </item>
             </argument>
         </column>
-        <column name="city">
-            <argument name="date_report" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                    </item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="align" xsi:type="string">left</item>
-                    <item name="label" xsi:type="string" translate="true">Date</item>
-                </item>
-            </argument>
-        </column>
         <column name="product_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -375,6 +346,48 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="align" xsi:type="string">left</item>
                     <item name="label" xsi:type="string" translate="true">Product Id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="storepickup_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="label" xsi:type="string" translate="true">Storepickup Id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="qty">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="label" xsi:type="string" translate="true">Qty</item>
+                </item>
+            </argument>
+        </column>
+        <column name="date_report">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">date</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">date</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/column</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="align" xsi:type="string">left</item>
+                    <item name="label" xsi:type="string" translate="true">Date Report</item>
                 </item>
             </argument>
         </column>

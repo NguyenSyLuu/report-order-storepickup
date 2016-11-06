@@ -28,6 +28,7 @@
             <argument name="collections" xsi:type="array">
                 <item name="storepickup_store_listing_data_source" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Store\Grid\Collection</item>
                 <item name="storepickup_report_listing_data_source" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Report\Grid\Collection</item>
+                <item name="storepickup_report_listingreport_data_source" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Report\Grid\Collection</item>
                 <item name="storepickup_tag_listing_data_source" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Tag\Grid\Collection</item>
                 <item name="storepickup_holiday_listing_data_source" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Holiday\Grid\Collection</item>
                 <item name="storepickup_specialday_listing_data_source" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Specialday\Grid\Collection</item>
