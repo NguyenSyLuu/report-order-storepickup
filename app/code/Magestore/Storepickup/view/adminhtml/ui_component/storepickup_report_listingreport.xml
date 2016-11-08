@@ -30,6 +30,10 @@
         <item name="spinner" xsi:type="string">storepickup_report_columns</item>
 
     </argument>
+    <argument name="dataSource" xsi:type="object">
+        Magestore\Storepickup\Model\Resource\Report\Collection
+        <updater>Magestore\Storepickup\Model\Resource\Report\Collection\Updater</updater>
+    </argument>
     <dataSource name="storepickup_report_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">StoreGridDataProvider</argument>

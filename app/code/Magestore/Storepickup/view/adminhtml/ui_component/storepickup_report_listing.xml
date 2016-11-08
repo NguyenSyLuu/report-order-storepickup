@@ -465,7 +465,7 @@
                 </item>
                 <item name="itemsAction" xsi:type="array">
                     <item name="edit" xsi:type="array">
-                        <item name="label" xsi:type="string" translate="true">Edit</item>
+                        <item name="label" xsi:type="string" translate="true">View</item>
                         <item name="path"  xsi:type="string">storepickupadmin/report/viewreport</item>
                     </item>
                 </item>

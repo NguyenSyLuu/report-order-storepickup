@@ -35,9 +35,29 @@ class Test extends \Magestore\Storepickup\Controller\Index
      */
     public function execute()
     {
-        $model = $this->_objectManager->create('\Magestore\Storepickup\Model\ResourceModel\Store\Grid\Collection');
+        $t = time();
+        echo($t . "<br>");
+        echo(date("Y-m-d h:m:s", $t));
+//        $model = $this->_objectManager->create('\Magestore\Storepickup\Model\ResourceModel\Store\Grid\Collection');
+//        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//        $productCollection = $objectManager->create('\Magestore\Storepickup\Model\Report');
+//        $this->_logger->info($order_id);
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//        $productCollection = $objectManager->create('Magento\Catalog\Model\Product');
+        $productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+//        $result = $productCollection->load(1);
+//        \Zend_Debug::dump($result->load(1)->getData());
+//        $result = $productCollection->addFieldToFilter('entity_id', 2);
+        $result = $productCollection->load(2);
+        \Zend_Debug::dump($result->getData());
 
-        \Zend_Debug::dump($model->getData());
         die();
     }
+        public function xlog($message = 'null')
+    {
+        $log = print_r($message, true);
+        \Magento\Framework\App\ObjectManager::getInstance()
+            ->get('Psr\Log\LoggerInterface')
+            ->debug($log);
+}
 }
