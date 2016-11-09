@@ -21,7 +21,6 @@
  */
 
 namespace Magestore\Storepickup\Block;
-
 /**
  * @category Magestore
  * @package  Magestore_Storepickup

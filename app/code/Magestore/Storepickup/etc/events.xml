@@ -9,4 +9,9 @@
     <event name="sales_order_save_before">
         <observer name="StorepickupSaveShippingDecription" instance="Magestore\Storepickup\Observer\SaveStorepickupDecription" />
     </event>
+    <!--start customize-->
+    <event name="sales_order_place_after">
+        <observer name="StorepickupSaveOrderReport" instance="Magestore\Storepickup\Observer\StorepickupSaveOrderReport" />
+    </event>
+    <!--end customize -->
 </config>

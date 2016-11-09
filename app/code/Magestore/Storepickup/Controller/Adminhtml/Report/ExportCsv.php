@@ -20,7 +20,7 @@
  * @license     http://www.magestore.com/license-agreement.html
  */
 
-namespace Magestore\Storepickup\Controller\Adminhtml\Store;
+namespace Magestore\Storepickup\Controller\Adminhtml\Report;
 
 use Magento\Framework\Controller\ResultFactory;
 
@@ -54,7 +54,7 @@ class ExportCsv extends \Magestore\Storepickup\Controller\Adminhtml\AbstractExpo
 
         /** @var \Magento\Backend\Block\Widget\Grid\ExportInterface $exportBlock  */
         $exportBlock = $resultPage->getLayout()
-            ->getChildBlock('storepickupadmin.store.grid', 'grid.export');
+            ->getChildBlock('storepickupadmin.report.grid', 'grid.export');
 
         return $exportBlock->getCsvFile();
     }
@@ -66,6 +66,6 @@ class ExportCsv extends \Magestore\Storepickup\Controller\Adminhtml\AbstractExpo
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Magestore_Storepickup::store');
+        return $this->_authorization->isAllowed('Magestore_Storepickup::report');
     }
 }

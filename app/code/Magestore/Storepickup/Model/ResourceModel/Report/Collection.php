@@ -41,4 +41,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         $this->_init('Magestore\Storepickup\Model\Report', 'Magestore\Storepickup\Model\ResourceModel\Report');
     }
+
+    public function addStorePickUpFilter($storePickUpId){
+        $this->addFieldToSelect('*')
+            ->addFieldToFilter('storepickup_id', $storePickUpId);
+//        var_dump($this->getSelect()->__toString());
+        return $this;
+    }
 }

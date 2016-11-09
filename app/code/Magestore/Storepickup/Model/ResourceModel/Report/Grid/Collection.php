@@ -38,7 +38,7 @@ class Collection extends ReportCollection  implements SearchResultInterface
      * @var AggregationInterface
      */
     protected $aggregations;
-
+    protected $request;
     /**
      * Collection constructor.
      *
@@ -59,6 +59,7 @@ class Collection extends ReportCollection  implements SearchResultInterface
         \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
         \Magento\Framework\Event\ManagerInterface $eventManager,
+        \Magento\Framework\App\Request\Http $request,
         $mainTable,
         $eventPrefix,
         $eventObject,
@@ -78,8 +79,18 @@ class Collection extends ReportCollection  implements SearchResultInterface
 
         $this->_eventPrefix = $eventPrefix;
         $this->_eventObject = $eventObject;
+        $this->request = $request;
         $this->_init($model, $resourceModel);
         $this->setMainTable($mainTable);
+    }
+    protected function _renderFiltersBefore() {
+        $storepickupId = $this->request->getParams('storepickup_id');
+
+//        die((int)$storepickupId);
+        $this->addFieldToFilter('storepickup_id', $storepickupId);
+//                \Zend_Debug::dump($storepickupId);
+
+        parent::_renderFiltersBefore();
     }
 
     /**

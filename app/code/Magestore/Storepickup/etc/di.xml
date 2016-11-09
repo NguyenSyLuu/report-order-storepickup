@@ -132,4 +132,19 @@
             <argument name="filterPool" xsi:type="object" shared="false">StorepickupGridFilterPool</argument>
         </arguments>
     </virtualType>
+
+    <type name="Magestore\Storepickup\Model\ResourceModel\Report\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magestore_storepickup_report</argument>
+            <argument name="eventPrefix" xsi:type="string">storepickup_report_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">report_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Storepickup\Model\ResourceModel\Report</argument>
+        </arguments>
+    </type>
+    <!--<virtualType name="ReportGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">-->
+        <!--<arguments>-->
+            <!--<argument name="collection" xsi:type="object" shared="false">Magestore\Storepickup\Model\ResourceModel\Report\Grid\Collection</argument>-->
+            <!--<argument name="filterPool" xsi:type="object" shared="false">StorepickupGridFilterPool</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
 </config>
