@@ -39,7 +39,7 @@ class ExportCsv extends \Magestore\Storepickup\Controller\Adminhtml\AbstractExpo
      */
     protected function _getFileName()
     {
-        return 'stores.csv';
+        return 'report.csv';
     }
 
     /**

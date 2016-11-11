@@ -38,13 +38,7 @@
         </action>
     </referenceBlock>
     <referenceBlock name="storepickupadmin.report.grid.columnSet">
-        <action method="unsetChild">
-            <argument name="alias" xsi:type="string">latitude</argument>
-        </action>
-        <action method="unsetChild">
-            <argument name="alias" xsi:type="string">longitude</argument>
-        </action>
-        <block class="Magestore\Storepickup\Block\Adminhtml\Widget\Grid\Column\StoreCheckboxes" as="checkbox_id" before="storepickup_id">
+        <block class="Magestore\Storepickup\Block\Adminhtml\Widget\Grid\Column\Checkboxes" as="checkbox_id" before="report_id">
             <arguments>
                 <argument name="header_css_class" xsi:type="string">a-center</argument>
                 <argument name="type" xsi:type="string">checkbox</argument>

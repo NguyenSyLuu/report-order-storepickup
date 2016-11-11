@@ -56,12 +56,14 @@ class StorepickupSaveOrderReport implements ObserverInterface
      * @var \Magento\Sales\Api\Data\OrderAddressInterface
      */
     protected $_orderAddressInterface;
+
     public function __construct(
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magestore\Storepickup\Model\StoreFactory $storeCollection,
 //        \Magestore\Storepickup\Model\ReportFactory $reportCollection,
         \Magento\Sales\Api\Data\OrderAddressInterface $orderAddressInterface
-    ){
+    )
+    {
         $this->_checkoutSession = $checkoutSession;
         $this->_storeCollection = $storeCollection;
 //        $this->_reportCollection = $reportCollection;
@@ -84,19 +86,31 @@ class StorepickupSaveOrderReport implements ObserverInterface
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $customerSession = $objectManager->create('Magento\Checkout\Model\Session');
         $sessionStore = $customerSession->getData('storepickup_session');
-        $this->_checkoutSession->getData('storepickup_session');
-        $t = time();
-        $date =date("Y-m-d", $t);
-        foreach($order->getAllItems() as $item){
-            $ProdustIds[]= $item->getProductId();
-            $proName[] = $item->getName(); // product name
-            $reportCollection->setData('order_id',$order_id)
-                ->setData('storepickup_id', $sessionStore['store_id'])
-                ->setData('product_id', $item->getProductId())
-                ->setData('product_name', $item->getName())
-                ->setData('date_report', $date)
-                ->save();
+        $shippingMethod = $order->getShippingMethod();
+//        \Zend_Debug::dump($order->getShippingMethod());
+//        \Zend_Debug::dump("+++++++++++++++++++");
 
+//        \Zend_Debug::dump($sessionStore);
+        $sessionStore = $customerSession->getData('storepickup_session',false);
+//        \Zend_Debug::dump("--------------------");
+//        \Zend_Debug::dump($sessionStore);
+//        die();
+//        $this->_checkoutSession->getData('storepickup_session');
+        if ($shippingMethod == 'storepickup_storepickup') {
+            $t = time();
+            $date = date("Y-m-d", $t);
+            foreach ($order->getAllItems() as $item) {
+                $ProdustIds[] = $item->getProductId();
+                $proName[] = $item->getName(); // product name
+                $reportCollection->setData('order_id', $order_id)
+                    ->setData('storepickup_id', $sessionStore['store_id'])
+                    ->setData('product_id', $item->getProductId())
+                    ->setData('product_name', $item->getName())
+                    ->setData('date_report', $date)
+                    ->setData('qty', $item->getQtyOrdered())
+                    ->save();
+
+            }
         }
 //        $productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
 //        $productCollection = $objectManager->create('Magestore\Storepickup\eportModel\ResourceModel\Report\CollectionFactory');

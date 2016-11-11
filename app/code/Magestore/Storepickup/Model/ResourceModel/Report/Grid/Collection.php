@@ -84,16 +84,26 @@ class Collection extends ReportCollection  implements SearchResultInterface
         $this->setMainTable($mainTable);
     }
     protected function _renderFiltersBefore() {
-        $storepickupId = $this->request->getParams('storepickup_id');
-
-//        die((int)$storepickupId);
-        $this->addFieldToFilter('storepickup_id', $storepickupId);
-//                \Zend_Debug::dump($storepickupId);
+        $storepickupId = $this->request->getParam('storepickup_id');
+//        \Zend_Debug::dump();die();
+        $this->addFieldToFilter('storepickup_id', 2);
 
         parent::_renderFiltersBefore();
     }
 
-    /**
+//    protected function _initSelect()
+//    {
+//        parent::_initSelect();
+//
+//        $this->join(
+//            [$this->getTable('magestore_storepickup_report')],
+//            'main_table.storepickup_id = ' . $this->getTable('magestore_storepickup_store') . '.storepickup_id',
+//            array()
+//        );
+//
+//    }
+
+        /**
      * @return AggregationInterface
      */
     public function getAggregations()

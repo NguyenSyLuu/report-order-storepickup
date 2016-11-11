@@ -24,10 +24,10 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="storepickupadmin_report.grid.container">
-            <block class="Magestore\Storepickup\Block\Adminhtml\Report\Grid" name="storepickupadmin.report.grid" as="grid">
+            <block class="Magestore\Storepickup\Block\Adminhtml\Widget\Grid" name="storepickupadmin.report.grid" as="grid">
                 <arguments>
                     <argument name="id" xsi:type="string">storepickupadmin_report_grid</argument>
-                    <argument name="dataSource" xsi:type="object">Magestore\Storepickup\Model\ResourceModel\Report\Collection</argument>
+                    <argument name="dataSource" xsi:type="object">Magestore\Storepickup\Model\ResourceModel\Report\Grid\Collection</argument>
                     <argument name="use_ajax" xsi:type="string">true</argument>
                     <argument name="default_sort" xsi:type="string">report_id</argument>
                     <argument name="default_dir" xsi:type="string">ASC</argument>
@@ -43,14 +43,6 @@
                         <argument name="form_field_name" xsi:type="string">report</argument>
                         <argument name="use_select_all" xsi:type="string">0</argument>
                         <argument name="options" xsi:type="array">
-                            <item name="enable" xsi:type="array">
-                                <item name="label" xsi:type="string" translate="true">Enable</item>
-                                <item name="url" xsi:type="string">storepickupadmin/report/massEnable</item>
-                            </item>
-                            <item name="disable" xsi:type="array">
-                                <item name="label" xsi:type="string" translate="true">Disable</item>
-                                <item name="url" xsi:type="string">storepickupadmin/report/massDisable</item>
-                            </item>
                             <item name="delete" xsi:type="array">
                                 <item name="label" xsi:type="string" translate="true">Delete</item>
                                 <item name="url" xsi:type="string">storepickupadmin/report/massDelete</item>
@@ -74,13 +66,13 @@
                     </arguments>
                 </block>
                 <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet"
-                       name="storepickupadmin.store.grid.columnSet">
+                       name="storepickupadmin.report.grid.columnSet">
                     <arguments>
                         <argument name="id" xsi:type="string">storepickupadmin_report_grid</argument>
                         <argument name="rowUrl" xsi:type="array">
                             <item name="path" xsi:type="string">storepickupadmin/report/edit</item>
                             <item name="extraParamsTemplate" xsi:type="array">
-                                <item name="storepickup_id" xsi:type="string">getId</item>
+                                <item name="report_id" xsi:type="string">getId</item>
                             </item>
                         </argument>
                     </arguments>
@@ -100,25 +92,33 @@
                             <argument name="id" xsi:type="string">product_name</argument>
                         </arguments>
                     </block>
-                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="storepickup_id">
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="date_report">
                         <arguments>
-                            <argument name="header" xsi:type="string" translate="true">storepickup id</argument>
-                            <argument name="type" xsi:type="string">number</argument>
-                            <argument name="index" xsi:type="string">storepickup_id</argument>
-                            <argument name="id" xsi:type="string">storepickup_id</argument>
+                            <argument name="header" xsi:type="string" translate="true">Date</argument>
+                            <argument name="type" xsi:type="string">date</argument>
+                            <argument name="index" xsi:type="string">date_report</argument>
+                            <argument name="id" xsi:type="string">date_report</argument>
                         </arguments>
                     </block>
                     <block class="Magento\Backend\Block\Widget\Grid\Column" as="order_id">
                         <arguments>
-                            <argument name="header" xsi:type="string" translate="true">order id</argument>
+                            <argument name="header" xsi:type="string" translate="true">Order Id</argument>
                             <argument name="type" xsi:type="string">number</argument>
                             <argument name="index" xsi:type="string">order_id</argument>
                             <argument name="id" xsi:type="string">order_id</argument>
                         </arguments>
                     </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="storepickup_id">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">StorePickUp Id</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">storepickup_id</argument>
+                            <argument name="id" xsi:type="string">storepickup_id</argument>
+                        </arguments>
+                    </block>
                     <block class="Magento\Backend\Block\Widget\Grid\Column" as="product_id">
                         <arguments>
-                            <argument name="header" xsi:type="string" translate="true">product id</argument>
+                            <argument name="header" xsi:type="string" translate="true">StorePickUp Id</argument>
                             <argument name="type" xsi:type="string">number</argument>
                             <argument name="index" xsi:type="string">product_id</argument>
                             <argument name="id" xsi:type="string">product_id</argument>
@@ -130,14 +130,6 @@
                             <argument name="type" xsi:type="string">number</argument>
                             <argument name="index" xsi:type="string">qty</argument>
                             <argument name="id" xsi:type="string">qty</argument>
-                        </arguments>
-                    </block>
-                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="date_report">
-                        <arguments>
-                            <argument name="header" xsi:type="string" translate="true">Date Report</argument>
-                            <argument name="type" xsi:type="string">date</argument>
-                            <argument name="index" xsi:type="string">date_report</argument>
-                            <argument name="id" xsi:type="string">date_report</argument>
                         </arguments>
                     </block>
                 </block>

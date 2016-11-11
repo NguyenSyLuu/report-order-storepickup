@@ -38,6 +38,10 @@ class Test extends \Magestore\Storepickup\Controller\Index
         $t = time();
         echo($t . "<br>");
         echo(date("Y-m-d h:m:s", $t));
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $customerSession = $objectManager->create('Magento\Checkout\Model\Session');
+        $sessionStore = $customerSession->getData('storepickup_session');
+        \Zend_Debug::dump($sessionStore);die();
 //        $model = $this->_objectManager->create('\Magestore\Storepickup\Model\ResourceModel\Store\Grid\Collection');
 //        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 //        $productCollection = $objectManager->create('\Magestore\Storepickup\Model\Report');

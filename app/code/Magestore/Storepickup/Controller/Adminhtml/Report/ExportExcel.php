@@ -39,7 +39,7 @@ class ExportExcel extends \Magestore\Storepickup\Controller\Adminhtml\AbstractEx
      */
     protected function _getFileName()
     {
-        return 'stores.xml';
+        return 'report.xml';
     }
 
     /**
