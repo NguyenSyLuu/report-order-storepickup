@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Magestore.
+ * Magestore
  *
  * NOTICE OF LICENSE
  *
@@ -25,29 +25,47 @@ namespace Magestore\Storepickup\Controller\Adminhtml\Report;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Index Grid Store Action.
- *
  * @category Magestore
  * @package  Magestore_Storepickup
  * @module   Storepickup
  * @author   Magestore Developer
  */
-class Viewreport extends \Magestore\Storepickup\Controller\Adminhtml\Report
+class ExportCsv extends \Magestore\Storepickup\Controller\Adminhtml\AbstractExportAction
 {
     /**
-     * Index action.
+     * file name to export.
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return string
      */
-    public function execute()
+    protected function _getFileName()
+    {
+        return 'report.csv';
+    }
+
+    /**
+     * get content.
+     *
+     * @return string
+     */
+    protected function _getContent()
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $storePickupId = $this->getRequest()->getParam('storepickup_id');
-//        \Zend_Debug::dump($storePickupId);die();
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-//        $this->initPage($resultPage);
-        $resultPage->getConfig()->getTitle()->prepend(__('Choose Store'));
 
-        return $resultPage;
+        /** @var \Magento\Backend\Block\Widget\Grid\ExportInterface $exportBlock  */
+        $exportBlock = $resultPage->getLayout()
+            ->getChildBlock('storepickupadmin.report.grid', 'grid.export');
+
+        return $exportBlock->getCsvFile();
+    }
+
+    /**
+     * Check the permission to run it.
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('Magestore_Storepickup::report');
     }
 }

@@ -45,7 +45,7 @@ class Viewreport extends \Magestore\Storepickup\Controller\Adminhtml\Report
         $storePickupId = $this->getRequest()->getParam('storepickup_id');
 //        \Zend_Debug::dump($storePickupId);die();
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-//        $this->initPage($resultPage);
+        $this->initPage($resultPage);
         $resultPage->getConfig()->getTitle()->prepend(__('Choose Store'));
 
         return $resultPage;

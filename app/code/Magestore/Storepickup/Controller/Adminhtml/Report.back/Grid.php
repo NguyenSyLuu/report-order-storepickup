@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Magestore.
+ * Magestore
  *
  * NOTICE OF LICENSE
  *
@@ -25,29 +25,22 @@ namespace Magestore\Storepickup\Controller\Adminhtml\Report;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Index Grid Store Action.
- *
  * @category Magestore
  * @package  Magestore_Storepickup
  * @module   Storepickup
  * @author   Magestore Developer
  */
-class Viewreport extends \Magestore\Storepickup\Controller\Adminhtml\Report
+class Grid extends \Magestore\Storepickup\Controller\Adminhtml\Report
 {
     /**
-     * Index action.
+     * Order grid.
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\View\Result\Layout
      */
     public function execute()
     {
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $storePickupId = $this->getRequest()->getParam('storepickup_id');
-//        \Zend_Debug::dump($storePickupId);die();
-        $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-//        $this->initPage($resultPage);
-        $resultPage->getConfig()->getTitle()->prepend(__('Choose Store'));
+        $resultLayout = $this->resultFactory->create(ResultFactory::TYPE_LAYOUT);
 
-        return $resultPage;
+        return $resultLayout;
     }
 }

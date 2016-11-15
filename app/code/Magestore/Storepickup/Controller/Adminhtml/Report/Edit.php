@@ -1,57 +1,27 @@
-<?php
+<?php 
 
-/**
- * Magestore.
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Magestore.com license that is
- * available through the world-wide-web at this URL:
- * http://www.magestore.com/license-agreement.html
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade this extension to newer
- * version in the future.
- *
- * @category    Magestore
- * @package     Magestore_Storepickup
- * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
- * @license     http://www.magestore.com/license-agreement.html
- */
-
-namespace Magestore\Storepickup\Controller\Adminhtml\Store;
+namespace Magestore\Storepickup\Controller\Adminhtml\Report;
 
 use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Edit Store Action.
- *
- * @category Magestore
- * @package  Magestore_Storepickup
- * @module   Storepickup
- * @author   Magestore Developer
+ * Action Edit
  */
-class Edit extends \Magestore\Storepickup\Controller\Adminhtml\Store
+class Edit extends \Magestore\Storepickup\Controller\Adminhtml\Report
 {
     /**
-     * Edit Store.
-     *
-     * @return \Magento\Framework\Controller\ResultInterface
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * Execute action
      */
     public function execute()
     {
-        $id = $this->getRequest()->getParam(static::PARAM_CRUD_ID);
-        /** @var \Magestore\Storepickup\Model\Store $model */
-        $model = $this->_createMainModel();
+        $id = $this->getRequest()->getParam('report_id');
+        $model = $this->_objectManager->create('Magestore\Storepickup\Model\Report');
 
         if ($id) {
             $model->load($id);
             if (!$model->getId()) {
-                $this->messageManager->addError(__('This Store no longer exists.'));
-                /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
-                $resultRedirect = $this->resultRedirectFactory->create();
+                $this->messageManager->addError(__('This item no longer exists.'));
+                $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
                 return $resultRedirect->setPath('*/*/');
             }
@@ -62,22 +32,10 @@ class Edit extends \Magestore\Storepickup\Controller\Adminhtml\Store
             $model->setData($data);
         }
 
-        $this->_coreRegistry->register(static::REGISTRY_NAME, $model);
+        $this->_objectManager->get('Magento\Framework\Registry')->register('registry_model', $model);
 
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-
-        $this->initPage($resultPage)->addBreadcrumb(
-            $id ? __('Edit Store') : __('New Store'),
-            $id ? __('Edit Store') : __('New Store')
-        );
-
-        $resultPage->getConfig()->getTitle()->prepend(__('Manage Store'));
-        $resultPage->getConfig()->getTitle()->prepend(
-            $model->getId() ?
-            __('Edit Store %1', $this->_escaper->escapeHtml($model->getStoreName())) : __('New Store')
-        );
-
+        $resultPage->setActiveMenu('Magestore_Report::report');
         return $resultPage;
     }
 }

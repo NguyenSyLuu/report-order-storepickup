@@ -32,7 +32,7 @@ use Magento\Framework\Controller\ResultFactory;
  * @module   Storepickup
  * @author   Magestore Developer
  */
-class Viewreport extends \Magestore\Storepickup\Controller\Adminhtml\Report
+class Index extends \Magestore\Storepickup\Controller\Adminhtml\Report
 {
     /**
      * Index action.
@@ -42,10 +42,9 @@ class Viewreport extends \Magestore\Storepickup\Controller\Adminhtml\Report
     public function execute()
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $storePickupId = $this->getRequest()->getParam('storepickup_id');
-//        \Zend_Debug::dump($storePickupId);die();
+//        \Zend_Debug::dump("dddddddddd");die();
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-//        $this->initPage($resultPage);
+        $this->initPage($resultPage);
         $resultPage->getConfig()->getTitle()->prepend(__('Choose Store'));
 
         return $resultPage;

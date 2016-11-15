@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Magestore.
+ * Magestore
  *
  * NOTICE OF LICENSE
  *
@@ -19,27 +19,32 @@
  * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
  * @license     http://www.magestore.com/license-agreement.html
  */
-namespace Magestore\Storepickup\Block\Adminhtml\Report;
+
+namespace Magestore\Storepickup\Model\ResourceModel;
 
 /**
+ * Resource Model Specialday.
+ *
  * @category Magestore
  * @package  Magestore_Storepickup
  * @module   Storepickup
  * @author   Magestore Developer
  */
-class Grid extends \Magestore\Storepickup\Block\Adminhtml\Widget\Grid
+class Report extends \Magestore\Storepickup\Model\ResourceModel\AbstractDbManageStores
 {
     /**
-     * get selected row values.
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function getSelectedRows()
+    public function _construct()
     {
-        $selectedStores = $this->_converter->toFlatArray(
-            $this->_storepickupHelper->getTreeSelectedStores()
-        );
+        $this->_init(\Magestore\Storepickup\Setup\UpgradeSchema::SCHEMA_REPORT, 'report_id');
+    }
 
-        return array_values($selectedStores);
+    /**
+     * {@inheritdoc}
+     */
+    public function getStoreRelationTable()
+    {
+        return $this->getTable(\Magestore\Storepickup\Setup\UpgradeSchema::SCHEMA_REPORT);
     }
 }

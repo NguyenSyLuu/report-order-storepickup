@@ -5,9 +5,9 @@ namespace Magestore\Storepickup\Controller\Adminhtml\Report;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Action MassDelete
+ * Action MassStatus
  */
-class MassDelete extends \Magestore\Storepickup\Controller\Adminhtml\Report
+class MassStatus extends \Magestore\Storepickup\Controller\Adminhtml\Report
 {
     /**
      * Execute action
@@ -15,6 +15,8 @@ class MassDelete extends \Magestore\Storepickup\Controller\Adminhtml\Report
     public function execute()
     {
         $reportIds = $this->getRequest()->getParam('reports');
+        $status = $this->getRequest()->getParam('status');
+
         if (!is_array($reportIds) || empty($reportIds)) {
             $this->messageManager->addError(__('Please select record(s).'));
         } else {
@@ -23,16 +25,17 @@ class MassDelete extends \Magestore\Storepickup\Controller\Adminhtml\Report
             $collection->addFieldToFilter('report_id', ['in' => $reportIds]);
             try {
                 foreach ($collection as $item) {
-                    $item->delete();
+                    $item->setStatus($status)
+                        ->setIsMassupdate(true)
+                        ->save();
                 }
                 $this->messageManager->addSuccess(
-                    __('A total of %1 record(s) have been deleted.', count($reportIds))
+                    __('A total of %1 record(s) have been changed status.', count($reportIds))
                 );
             } catch (\Exception $e) {
                 $this->messageManager->addError($e->getMessage());
             }
         }
-
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);;
 
         return $resultRedirect->setPath('*/*/');

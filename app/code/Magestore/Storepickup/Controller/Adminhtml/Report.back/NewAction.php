@@ -20,39 +20,30 @@
  * @license     http://www.magestore.com/license-agreement.html
  */
 
-namespace Magestore\Storepickup\Block\Adminhtml\Store\Edit;
+namespace Magestore\Storepickup\Controller\Adminhtml\Store;
+
+use Magento\Framework\Controller\ResultFactory;
 
 /**
- * class Form.
+ * NewAction Store Action.
  *
  * @category Magestore
  * @package  Magestore_Storepickup
  * @module   Storepickup
  * @author   Magestore Developer
  */
-class Form extends \Magento\Backend\Block\Widget\Form\Generic
+class NewAction extends \Magestore\Storepickup\Controller\Adminhtml\Store
 {
     /**
-     * Prepare form before rendering HTML.
+     * Create new Store.
      *
-     * @return $this
+     * @return \Magento\Framework\Controller\ResultInterface
      */
-    protected function _prepareForm()
+    public function execute()
     {
-        /** @var \Magento\Framework\Data\Form $form */
-        $form = $this->_formFactory->create(
-            [
-                'data' => [
-                    'id' => 'edit_form',
-                    'action' => $this->getUrl('*/*/save'),
-                    'method' => 'post',
-                    'enctype' => 'multipart/form-data',
-                ],
-            ]
-        );
-        $form->setUseContainer(true);
-        $this->setForm($form);
+        /** @var \Magento\Framework\Controller\Result\Forward $resultForward */
+        $resultForward = $this->resultFactory->create(ResultFactory::TYPE_FORWARD);
 
-        return parent::_prepareForm();
+        return $resultForward->forward('edit');
     }
 }

@@ -27,7 +27,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <uiComponent name="storepickup_report_listing"/>
+             <uiComponent name="storepickup_report_listing"/>
         </referenceContainer>
     </body>
 </page>

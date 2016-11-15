@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="admin-2columns-left">
+  <body>
+    <referenceContainer name="content">
+      <block class="Magestore\Storepickup\Block\Adminhtml\Report\Edit" name="admin.block.report.form.container"/>
+    </referenceContainer>
+    <referenceContainer name="left">
+      <block class="Magestore\Storepickup\Block\Adminhtml\Report\Edit\Tabs" name="report_edit_tab">
+        <block class="Magestore\Storepickup\Block\Adminhtml\Report\Edit\Tab\GeneralTab" name="report_edit_tab_general"/>
+        <action method="addTab">
+          <argument name="name" xsi:type="string">main_section</argument>
+          <argument name="block" xsi:type="string">report_edit_tab_general</argument>
+        </action>
+      </block>
+    </referenceContainer>
+  </body>
+</page>

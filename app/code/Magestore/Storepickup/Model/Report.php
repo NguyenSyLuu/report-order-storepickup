@@ -1,66 +1,38 @@
-<?php
-
-/**
- * Magestore
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Magestore.com license that is
- * available through the world-wide-web at this URL:
- * http://www.magestore.com/license-agreement.html
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade this extension to newer
- * version in the future.
- *
- * @category    Magestore
- * @package     Magestore_Storepickup
- * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
- * @license     http://www.magestore.com/license-agreement.html
- */
+<?php 
 
 namespace Magestore\Storepickup\Model;
 
 /**
- * Model Specialday.
- *
- * @category Magestore
- * @package  Magestore_Storepickup
- * @module   Storepickup
- * @author   Magestore Developer
+ * Model Report
  */
-class Report extends \Magestore\Storepickup\Model\AbstractModelManageStores
+class Report extends \Magento\Framework\Model\AbstractModel
 {
     /**
-     * Model construct that should be used for object initialization.
+     * Model constructor
+     *
+     * @param \Magento\Framework\Model\Context                   $context
+     * @param \Magento\Framework\Registry                        $registry
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb      $resourceCollection
+     * @param array $data
      */
-    public function _construct()
-    {
-        $this->_init('Magestore\Storepickup\Model\ResourceModel\Report');
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        array $data = array()
+    ) {
+        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
     /**
-     * Processing object before save data.
+     * Model construct that should be used for object initialization
+     *
+     * @return void
      */
-    public function beforeSave()
+    protected function _construct()
     {
-        $this->_prepareSaveWorkingTime();
-
-        return parent::beforeSave();
-    }
-
-    /*
-     * prepare save working time of specialday
-     */
-    protected function _prepareSaveWorkingTime()
-    {
-        if (is_array($this->getData('time_open'))) {
-            $this->setData('time_open', implode(':', $this->getData('time_open')));
-        }
-
-        if (is_array($this->getData('time_close'))) {
-            $this->setData('time_close', implode(':', $this->getData('time_close')));
-        }
+        $this->_init('Magestore\Storepickup\Model\ResourceModel\Report');
     }
 }
